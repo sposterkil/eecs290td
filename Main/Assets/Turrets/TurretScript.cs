@@ -3,6 +3,9 @@ using System.Collections;
 
 public class TurretScript : MonoBehaviour {
 	Transform turret;
+	GameObject target;
+	
+	public int damage;
 
 	// Use this for initialization
 	void Start () {
@@ -14,9 +17,9 @@ public class TurretScript : MonoBehaviour {
 		//Look at target
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 		if (enemies.Length == 1) {
-			turret.LookAt(enemies[0].transform.position);
+			target = enemies[0];
 		}
-		else {
+		else if (enemies.Length != 0) {
 			Transform enemy;
 			Vector3 dist;
 			int indexOfLowest = -1;
@@ -33,7 +36,11 @@ public class TurretScript : MonoBehaviour {
 					distOfLowest = dist.magnitude;
 				}
 			}
-			turret.LookAt(enemies[indexOfLowest].transform.position);
+			target = enemies[indexOfLowest];
+		}
+		if (target != null) {
+			turret.LookAt(target.transform.position);
+			target.GetComponent<EnemyScript>().takeDamage(damage);
 		}
 	}
 }
