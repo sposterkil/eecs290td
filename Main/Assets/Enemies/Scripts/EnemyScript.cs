@@ -3,6 +3,8 @@ using System.Collections;
 
 public class EnemyScript : MonoBehaviour {
 	public int health;
+	public int damage;
+	public float speed;
 
 	// Use this for initialization
 	void Start () {
