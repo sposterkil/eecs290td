@@ -3,42 +3,48 @@ using System.Collections;
 
 public class TurretScript : MonoBehaviour {
 	Transform turret;
-	GameObject target;
-	
+	Transform target;
+	GameObject[] beacons;
+
+	public long cooldownTimer;
+
+	public Component script;
 	public int damage;
-	public int range;
+	public int cooldown;
+	public float range;
 	public float reduxDamage;
-	public long reduxDamageDuration;
+	public int reduxDamageDuration;
 	public float reduxSpeed;
-	public long reduxSpeedDuration;
+	public int reduxSpeedDuration;
 
 	// Use this for initialization
 	void Start () {
 		turret = transform.FindChild("Turret").FindChild("TurretBody").transform;
+		beacons = GameObject.FindGameObjectsWithTag("Beacon");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//Look at target
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-		GameObject[] beacons = GameObject.FindGameObjectsWithTag("Beacon");
 		if (enemies.Length == 1) {
-			target = enemies[0];
+			target = enemies[0].transform;
 		}
 		else if (enemies.Length != 0) {
 			//Have tower aim via distance from beacon for the closest beacon.
 			if (beacons.Length >= 1) {
 				Transform beacon = null;
-				Vector3 dist;
+				Vector3 distB;
+				Vector3 distT;
 				int indexOfLowest = -1;
 				float distOfLowest = 0f;
 				if (beacons.Length > 1) {
 					for (int i = 0; i < beacons.Length; i++) {
 						beacon = beacons[i].transform;
-						dist = beacon.position - transform.position;
-						if ((indexOfLowest == -1)||(dist.magnitude < distOfLowest)) {
+						distB = beacon.position - transform.position;
+						if ((indexOfLowest == -1)||(distB.magnitude < distOfLowest)) {
 							indexOfLowest = i;
-							distOfLowest = dist.magnitude;
+							distOfLowest = distB.magnitude;
 						}
 					}
 				}
@@ -49,37 +55,52 @@ public class TurretScript : MonoBehaviour {
 				distOfLowest = 0f;
 				for (int i = 0; i < enemies.Length; i++) {
 					enemy = enemies[i].transform;
-					dist = enemy.position - beacon.position;
-					if ((indexOfLowest == -1)||(dist.magnitude < distOfLowest)) {
+					distB = enemy.position - beacon.position;
+					distT = enemy.position - transform.position;
+					if (((indexOfLowest == -1)||(distB.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
 						indexOfLowest = i;
-						distOfLowest = dist.magnitude;
+						distOfLowest = distB.magnitude;
 					}
 				}
-				target = enemies[indexOfLowest];
+				if (indexOfLowest != -1)
+					target = enemies[indexOfLowest].transform;
+				else
+					target = null;
 			}
 			//Otherwise, if no beacons exist, revert the tower to aim via proxy.
 			else {
 				Transform enemy;
-				Vector3 dist;
+				Vector3 distT;
 				int indexOfLowest = -1;
 				float distOfLowest = 0f;
 				for (int i = 0; i < enemies.Length; i++) {
 					enemy = enemies[i].transform;
-					dist = enemy.position - transform.position;
-					if ((indexOfLowest == -1)||(dist.magnitude < distOfLowest)) {
+					distT = enemy.position - transform.position;
+					if (((indexOfLowest == -1)||(distT.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
 						indexOfLowest = i;
-						distOfLowest = dist.magnitude;
+						distOfLowest = distT.magnitude;
 					}
 				}
-				target = enemies[indexOfLowest];
+				target = enemies[indexOfLowest].transform;
 			}
 		}
 		if (target != null) {
-			Vector3 dist = target.position - transform.position;
-			if (dist
-		
 			turret.LookAt(target.transform.position);
-			target.GetComponent<EnemyScript>().takeDamage(damage);
+			if (System.DateTime.Now.Ticks >= cooldownTimer) {
+				//Apply damage
+				target.GetComponent<EnemyScript>().takeDamage(damage);
+				//Apply damage reduction if applicable
+				if (reduxDamage != 0) {
+					target.GetComponent<EnemyScript>().reduceDamage(reduxDamage, reduxDamageDuration);
+				}
+				//Apply movement speed reduction if applicable
+				if (reduxSpeed != 0) {
+					target.GetComponent<EnemyScript>().reduceSpeed(reduxSpeed, reduxSpeedDuration);
+				}
+				cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
+			}
 		}
+		else
+			turret.LookAt(turret.position + new Vector3(0, 0, 1));
 	}
 }
