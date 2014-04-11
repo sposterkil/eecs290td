@@ -8,7 +8,6 @@ public class TurretScript : MonoBehaviour {
 
 	public long cooldownTimer;
 
-	public Component script;
 	public int damage;
 	public int cooldown;
 	public float range;
