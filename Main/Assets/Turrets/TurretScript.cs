@@ -6,6 +6,11 @@ public class TurretScript : MonoBehaviour {
 	GameObject target;
 	
 	public int damage;
+	public int range;
+	public float reduxDamage;
+	public long reduxDamageDuration;
+	public float reduxSpeed;
+	public long reduxSpeedDuration;
 
 	// Use this for initialization
 	void Start () {
@@ -70,6 +75,9 @@ public class TurretScript : MonoBehaviour {
 			}
 		}
 		if (target != null) {
+			Vector3 dist = target.position - transform.position;
+			if (dist
+		
 			turret.LookAt(target.transform.position);
 			target.GetComponent<EnemyScript>().takeDamage(damage);
 		}
