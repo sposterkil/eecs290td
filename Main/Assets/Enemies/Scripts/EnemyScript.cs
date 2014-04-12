@@ -11,17 +11,19 @@ public class EnemyScript : MonoBehaviour {
 	float speed;
 	long speedduration;
 
-	// Use this for initialization
 	void Start () {
 		//System.DateTime.Now.Ticks
-		damage = 1;
-		speed = 1;
+		damage = defaultDamage;
+		speed = defaultSpeed;
 		damageduration = -1;
 		speedduration = -1;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
+		//Update poisition
+		transform.position += new Vector3(0, 0, .005f * speed);
+
+		//Update debuffs
 		if (damageduration != -1) {
 			if (System.DateTime.Now.Ticks >= damageduration) {
 				damageduration = -1;
