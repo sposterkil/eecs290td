@@ -18,7 +18,7 @@ public class TurretScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		turret = transform.FindChild("Turret").FindChild("TurretBody").transform;
+		turret = transform.FindChild("Turret").FindChild("Turret1").transform;
 		beacons = GameObject.FindGameObjectsWithTag("Beacon");
 	}
 	
@@ -85,6 +85,7 @@ public class TurretScript : MonoBehaviour {
 		}
 		if (target != null) {
 			turret.LookAt(target.transform.position);
+			Debug.DrawLine(turret.position, target.position);
 			if (System.DateTime.Now.Ticks >= cooldownTimer) {
 				//Apply damage
 				target.GetComponent<EnemyScript>().takeDamage(damage);
