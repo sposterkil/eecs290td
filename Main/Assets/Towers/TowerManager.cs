@@ -1,31 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MASTER : MonoBehaviour {
-	Transform turret;
-	Transform target;
+public class TowerManager : MonoBehaviour {
 	GameObject[] beacons;
-
-	public long cooldownTimer;
-
-	public int damage;
-	public int cooldown;
-	public float range;
-	public float reduxDamage;
-	public int reduxDamageDuration;
-	public float reduxSpeed;
-	public int reduxSpeedDuration;
+	GameObject[] enemies;
 
 	// Use this for initialization
 	void Start () {
-		turret = transform.FindChild("Turret").FindChild("Turret1").transform;
 		beacons = GameObject.FindGameObjectsWithTag("Beacon");
+		enemies = GameObject.FindGameObjectsWithTag("Enemy");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//Look at target
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		beacons = GameObject.FindGameObjectsWithTag("Beacon");
+		enemies = GameObject.FindGameObjectsWithTag("Enemy");
+	}
+
+	public Transform findTarget(Transform tower, float range) {
+		Transform target = null;
+
+
 		if (enemies.Length == 1) {
 			target = enemies[0].transform;
 		}
@@ -40,7 +35,7 @@ public class MASTER : MonoBehaviour {
 				if (beacons.Length > 1) {
 					for (int i = 0; i < beacons.Length; i++) {
 						beacon = beacons[i].transform;
-						distB = beacon.position - transform.position;
+						distB = beacon.position - tower.position;
 						if ((indexOfLowest == -1)||(distB.magnitude < distOfLowest)) {
 							indexOfLowest = i;
 							distOfLowest = distB.magnitude;
@@ -55,7 +50,7 @@ public class MASTER : MonoBehaviour {
 				for (int i = 0; i < enemies.Length; i++) {
 					enemy = enemies[i].transform;
 					distB = enemy.position - beacon.position;
-					distT = enemy.position - transform.position;
+					distT = enemy.position - tower.position;
 					if (((indexOfLowest == -1)||(distB.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
 						indexOfLowest = i;
 						distOfLowest = distB.magnitude;
@@ -74,33 +69,24 @@ public class MASTER : MonoBehaviour {
 				float distOfLowest = 0f;
 				for (int i = 0; i < enemies.Length; i++) {
 					enemy = enemies[i].transform;
-					distT = enemy.position - transform.position;
+					distT = enemy.position - tower.position;
 					if (((indexOfLowest == -1)||(distT.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
 						indexOfLowest = i;
 						distOfLowest = distT.magnitude;
 					}
 				}
-				target = enemies[indexOfLowest].transform;
+				if (indexOfLowest != -1)
+					target = enemies[indexOfLowest].transform;
+				else
+					target = null;
 			}
 		}
-		if (target != null) {
-			turret.LookAt(target.transform.position);
-			Debug.DrawLine(turret.position, target.position);
-			if (System.DateTime.Now.Ticks >= cooldownTimer) {
-				//Apply damage
-				target.GetComponent<EnemyScript>().takeDamage(damage);
-				//Apply damage reduction if applicable
-				if (reduxDamage != 0) {
-					target.GetComponent<EnemyScript>().reduceDamage(reduxDamage, reduxDamageDuration);
-				}
-				//Apply movement speed reduction if applicable
-				if (reduxSpeed != 0) {
-					target.GetComponent<EnemyScript>().reduceSpeed(reduxSpeed, reduxSpeedDuration);
-				}
-				cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
-			}
-		}
-		else
-			turret.LookAt(turret.position + new Vector3(0, 0, -1));
+
+
+
+
+
+
+		return target;
 	}
 }
