@@ -20,13 +20,16 @@ public class TowerManager : MonoBehaviour {
 	public Transform findTarget(Transform tower, float range) {
 		Transform target = null;
 
-
+		//If only a single enemy exists, only one potential target exists.
 		if (enemies.Length == 1) {
-			if (enemies[0] != null)
-				target = enemies[0].transform;
+			if (enemies[0] != null){
+				Vector3 dist = enemies[0].transform.position - tower.position;
+				if (dist.magnitude <= range)
+					target = enemies[0].transform;
+			}
 		}
 		else if (enemies.Length != 0) {
-			//Have tower aim via distance from beacon for the closest beacon.
+			//Target via distance from beacon for the closest beacon.
 			if (beacons.Length >= 1) {
 				Transform beacon = null;
 				Vector3 distB;
@@ -64,7 +67,7 @@ public class TowerManager : MonoBehaviour {
 				else
 					target = null;
 			}
-			//Otherwise, if no beacons exist, revert the tower to aim via proxy.
+			//Otherwise, if no beacons exist, revert to targeting via proxy to tower.
 			else {
 				Transform enemy;
 				Vector3 distT;
@@ -86,12 +89,6 @@ public class TowerManager : MonoBehaviour {
 					target = null;
 			}
 		}
-
-
-
-
-
-
 		return target;
 	}
 }
