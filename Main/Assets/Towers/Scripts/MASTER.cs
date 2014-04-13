@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TurretScript : MonoBehaviour {
+public class MASTER : MonoBehaviour {
 	Transform turret;
 	Transform target;
 	GameObject[] beacons;
@@ -101,6 +101,6 @@ public class TurretScript : MonoBehaviour {
 			}
 		}
 		else
-			turret.LookAt(turret.position + new Vector3(0, 0, 1));
+			turret.LookAt(turret.position + new Vector3(0, 0, -1));
 	}
 }
