@@ -46,12 +46,12 @@ public class EnemyScript : MonoBehaviour {
 	
 	public void reduceDamage(float factor, long duration) {
 		damage = (1 - factor) * defaultDamage;
-		damageduration = (System.DateTime.Now.Ticks + (1000L * 10000L)) * duration;
+		damageduration = System.DateTime.Now.Ticks + (10000L * duration);
 	}
 	
 	public void reduceSpeed(float factor, long duration) {
 		speed = (1 - factor) * defaultSpeed;
-		speedduration = (System.DateTime.Now.Ticks + (1000L * 10000L)) * duration;
+		speedduration = System.DateTime.Now.Ticks + (10000L * duration);
 	}
 	
 	void die() {

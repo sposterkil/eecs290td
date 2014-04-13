@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TowerScript : MonoBehaviour {
+public class Tower : MonoBehaviour {
 	TowerManager manager;
 	Transform turret;
 	Transform target;
@@ -28,7 +28,6 @@ public class TowerScript : MonoBehaviour {
 		target = manager.findTarget(transform, range);		
 		if (target != null) {
 			turret.LookAt(target.transform.position);
-			Debug.DrawLine(turret.position, target.position);
 			if (System.DateTime.Now.Ticks >= cooldownTimer) {
 				//Apply damage
 				target.GetComponent<EnemyScript>().takeDamage(damage);
@@ -41,6 +40,7 @@ public class TowerScript : MonoBehaviour {
 					target.GetComponent<EnemyScript>().reduceSpeed(reduxSpeed, reduxSpeedDuration);
 				}
 				cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
+				Debug.DrawLine(turret.position, target.position, Color.blue);
 			}
 		}
 		else

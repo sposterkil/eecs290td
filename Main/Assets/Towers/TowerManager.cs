@@ -22,7 +22,8 @@ public class TowerManager : MonoBehaviour {
 
 
 		if (enemies.Length == 1) {
-			target = enemies[0].transform;
+			if (enemies[0] != null)
+				target = enemies[0].transform;
 		}
 		else if (enemies.Length != 0) {
 			//Have tower aim via distance from beacon for the closest beacon.
@@ -48,12 +49,14 @@ public class TowerManager : MonoBehaviour {
 				indexOfLowest = -1;
 				distOfLowest = 0f;
 				for (int i = 0; i < enemies.Length; i++) {
-					enemy = enemies[i].transform;
-					distB = enemy.position - beacon.position;
-					distT = enemy.position - tower.position;
-					if (((indexOfLowest == -1)||(distB.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
-						indexOfLowest = i;
-						distOfLowest = distB.magnitude;
+					if (enemies[i] != null) {
+						enemy = enemies[i].transform;
+						distB = enemy.position - beacon.position;
+						distT = enemy.position - tower.position;
+						if (((indexOfLowest == -1)||(distB.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
+							indexOfLowest = i;
+							distOfLowest = distB.magnitude;
+						}
 					}
 				}
 				if (indexOfLowest != -1)
@@ -68,11 +71,13 @@ public class TowerManager : MonoBehaviour {
 				int indexOfLowest = -1;
 				float distOfLowest = 0f;
 				for (int i = 0; i < enemies.Length; i++) {
-					enemy = enemies[i].transform;
-					distT = enemy.position - tower.position;
-					if (((indexOfLowest == -1)||(distT.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
-						indexOfLowest = i;
-						distOfLowest = distT.magnitude;
+					if (enemies[i] != null) {
+						enemy = enemies[i].transform;
+						distT = enemy.position - tower.position;
+						if (((indexOfLowest == -1)||(distT.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
+							indexOfLowest = i;
+							distOfLowest = distT.magnitude;
+						}
 					}
 				}
 				if (indexOfLowest != -1)
