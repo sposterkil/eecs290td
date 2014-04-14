@@ -12,7 +12,7 @@ public class MapSpawner : MonoBehaviour {
 	void Update() {
 
 		// spawn a random virus
-		if (Input.GetKey (KeyCode.F2)){
+		if (Input.GetKeyDown (KeyCode.F2)){
 			spawnVirus();
 		}
 	}

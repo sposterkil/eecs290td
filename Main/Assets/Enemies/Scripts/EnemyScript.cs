@@ -5,7 +5,8 @@ public class EnemyScript : MonoBehaviour {
 	public int health;
 	public int defaultDamage;
 	public int defaultSpeed;
-
+	
+	GameObject[] stepnodes;
 	// an invisible object which will emit the death animation
 	public GameObject emitter;
 
@@ -20,6 +21,7 @@ public class EnemyScript : MonoBehaviour {
 		speed = defaultSpeed;
 		damageduration = -1;
 		speedduration = -1;
+
 	}
 
 	void Update () {
@@ -61,5 +63,16 @@ public class EnemyScript : MonoBehaviour {
 		GameObject clone;
 		clone = Instantiate (emitter, transform.position, Quaternion.identity) as GameObject;
 		GameObject.Destroy(this.gameObject);
+	}
+
+	void OnTriggerEnter(Collider other) {
+		Debug.Log ("hit node");
+	}
+
+	public Transform getNextNode() {
+
+
+
+		return null;
 	}
 }
