@@ -6,6 +6,9 @@ public class EnemyScript : MonoBehaviour {
 	public int defaultDamage;
 	public int defaultSpeed;
 
+	// an invisible object which will emit the death animation
+	public GameObject emitter;
+
 	float damage;
 	long damageduration;
 	float speed;
@@ -55,6 +58,8 @@ public class EnemyScript : MonoBehaviour {
 	}
 	
 	void die() {
+		GameObject clone;
+		clone = Instantiate (emitter, transform.position, Quaternion.identity) as GameObject;
 		GameObject.Destroy(this.gameObject);
 	}
 }
