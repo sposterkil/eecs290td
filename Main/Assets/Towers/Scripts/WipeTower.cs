@@ -11,6 +11,7 @@ public class WipeTower : MonoBehaviour {
 	public int damage;
 	public int cooldown;
 	public float range;
+	public float rangeAOE;
 	public float reduxDamage;
 	public int reduxDamageDuration;
 	public float reduxSpeed;
@@ -25,22 +26,29 @@ public class WipeTower : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		target = manager.findTarget(transform, range);		
+		target = manager.findTargetByProxy(transform, range);
 		if (target != null) {
+			Transform[] targets = manager.findAOETargets(target, rangeAOE);
 			turret.LookAt(target.transform.position);
 			if (System.DateTime.Now.Ticks >= cooldownTimer) {
-				//Apply damage
-				target.GetComponent<EnemyScript>().takeDamage(damage);
-				//Apply damage reduction if applicable
-				if (reduxDamage != 0) {
-					target.GetComponent<EnemyScript>().reduceDamage(reduxDamage, reduxDamageDuration);
-				}
-				//Apply movement speed reduction if applicable
-				if (reduxSpeed != 0) {
-					target.GetComponent<EnemyScript>().reduceSpeed(reduxSpeed, reduxSpeedDuration);
+				Transform subTarget;
+				for (int i = 0; i < targets.Length; i++) {
+					if (targets[i] != null) {
+						subTarget = targets[i];
+						//Apply damage
+						subTarget.GetComponent<EnemyScript>().takeDamage(damage);
+						//Apply damage reduction if applicable
+						if (reduxDamage != 0) {
+							subTarget.GetComponent<EnemyScript>().reduceDamage(reduxDamage, reduxDamageDuration);
+						}
+						//Apply movement speed reduction if applicable
+						if (reduxSpeed != 0) {
+							subTarget.GetComponent<EnemyScript>().reduceSpeed(reduxSpeed, reduxSpeedDuration);
+						}
+					}
 				}
 				cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
-				Debug.DrawLine(turret.position, target.position, new Color(0, 0, 0, 255));
+				Debug.DrawLine(turret.position, target.position, new Color(200, 120, 0));
 			}
 		}
 		else
