@@ -2,14 +2,17 @@
 using System.Collections;
 
 public class EnemyScript : MonoBehaviour {
+	public Transform virusTransform; //this object's position
+	
 	public int health;
 	public int defaultDamage;
 	public int defaultSpeed;
 	
-	GameObject[] stepnodes;
-	// an invisible object which will emit the death animation
-	public GameObject emitter;
-
+	GameObject[] stepnodes; // the list of nodes that are available to move to next
+	int step = 0; // the step number
+	GameObject nextNode;
+	public GameObject emitter; // an invisible object which will emit the death animation
+ 
 	float damage;
 	long damageduration;
 	float speed;
@@ -26,7 +29,7 @@ public class EnemyScript : MonoBehaviour {
 
 	void Update () {
 		//Update poisition
-		transform.position += new Vector3(0, 0, .005f * speed);
+		transform.position =  Vector3.MoveTowards(transform.position, nextNode.transform.position, speed * Time.deltaTime);
 
 		//Update debuffs
 		if (damageduration != -1) {
@@ -67,12 +70,10 @@ public class EnemyScript : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		Debug.Log ("hit node");
-	}
-
-	public Transform getNextNode() {
-
-
-
-		return null;
+		step++;
+		stepnodes = GameObject.FindGameObjectsWithTag ("Step" + step + "nodes");
+		int next = Random.Range (1, 4);
+		//virusTransform.LookAt (stepnodes[2].transform, Vector3.up);
+		nextNode = stepnodes [next];
 	}
 }
