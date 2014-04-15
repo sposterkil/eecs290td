@@ -123,8 +123,28 @@ public class TowerManager : MonoBehaviour {
 		}
 		return target;
 	}
+
+	public Vector3 findGroupTarget(Transform tower, float range) {
+		Vector3 target = tower.position;
+		Vector3 dist;
+		int counter = 0;;
+		for (int i = 0; i < enemies.Length; i++) {
+			if (enemies[i] != null) {
+				dist = enemies[i].transform.position - tower.position;
+				if (dist.magnitude <= range) {
+					if (counter == 0)
+						target = Vector3.zero;
+					target += enemies[i].transform.position;
+					counter++;
+				}
+			}
+		}
+		if (counter != 0)
+			target /= counter;
+		return target;
+	}
 	
-	public Transform[] findAOETargets(Transform target, float range) {
+	public Transform[] findAOETargets(Vector3 target, float range) {
 		Transform[] targets = new Transform[enemies.Length];
 		Transform enemy;
 		Vector3 dist;
@@ -132,7 +152,7 @@ public class TowerManager : MonoBehaviour {
 		for (int i = 0; i < enemies.Length; i++) {
 			if (enemies[i] != null) {
 				enemy = enemies[i].transform;
-				dist = enemy.position - target.position;
+				dist = enemy.position - target;
 				if (dist.magnitude <= range) {
 					targets[currentIndex] = enemy;
 					currentIndex++;

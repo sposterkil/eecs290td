@@ -4,7 +4,7 @@ using System.Collections;
 public class WipeTower : MonoBehaviour {
 	TowerManager manager;
 	Transform turret;
-	Transform target;
+	Vector3 target;
 
 	public long cooldownTimer;
 
@@ -21,15 +21,15 @@ public class WipeTower : MonoBehaviour {
 	void Start () {
 		manager = GameObject.Find("Towers").GetComponent<TowerManager>();
 		turret = transform.FindChild("Turret").FindChild("Turret1").transform;
-		target = null;
+		target = Vector3.zero;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		target = manager.findTargetByProxy(transform, range);
-		if (target != null) {
+		target = manager.findGroupTarget(transform, range);
+		if (target != transform.position) {
 			Transform[] targets = manager.findAOETargets(target, rangeAOE);
-			turret.LookAt(target.transform.position);
+			turret.LookAt(target);
 			if (System.DateTime.Now.Ticks >= cooldownTimer) {
 				Transform subTarget;
 				for (int i = 0; i < targets.Length; i++) {
@@ -48,7 +48,7 @@ public class WipeTower : MonoBehaviour {
 					}
 				}
 				cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
-				Debug.DrawLine(turret.position, target.position, new Color(200, 120, 0));
+				Debug.DrawLine(turret.position, target, new Color(200, 120, 0));
 			}
 		}
 		else
