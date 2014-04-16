@@ -19,12 +19,10 @@ public class EnemyScript : MonoBehaviour {
 	long speedduration;
 
 	void Start () {
-		//System.DateTime.Now.Ticks
 		damage = defaultDamage;
 		speed = defaultSpeed;
 		damageduration = -1;
 		speedduration = -1;
-
 	}
 
 	void Update () {

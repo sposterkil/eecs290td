@@ -123,6 +123,47 @@ public class TowerManager : MonoBehaviour {
 		}
 		return target;
 	}
+	
+	public Transform findTargetByHealth(Transform tower, float range, bool highest) {
+		Transform target = null;
+		Vector3 dist;
+		//If only a single enemy exists, only one potential target exists.
+		if (enemies.Length == 1) {
+			if (enemies[0] != null){
+				dist = enemies[0].transform.position - tower.position;
+				if (dist.magnitude <= range)
+					target = enemies[0].transform;
+			}
+		}
+		else if (enemies.Length != 0) {
+			Transform enemy;
+			int indexOfHealth = -1;
+			int health = -1;
+			for (int i = 0; i < enemies.Length; i++) {
+				if (enemies[i] != null) {
+					enemy = enemies[i].transform;
+					dist = enemy.position - tower.position;
+					if (dist.magnitude <= range) {
+						if (highest) {
+							if ((indexOfHealth == -1)||(enemy.GetComponent<EnemyScript>().health > health)) {
+								indexOfHealth = i;
+								health = enemy.GetComponent<EnemyScript>().health;
+							}
+						}
+						else {
+							if ((indexOfHealth == -1)||(enemy.GetComponent<EnemyScript>().health < health)) {
+								indexOfHealth = i;
+								health = enemy.GetComponent<EnemyScript>().health;
+							}
+						}
+					}
+				}
+			}
+			if (indexOfHealth != -1)
+				target = enemies[indexOfHealth].transform;
+		}
+		return target;
+	}
 
 	public Vector3 findGroupTarget(Transform tower, float range) {
 		Vector3 target = tower.position;

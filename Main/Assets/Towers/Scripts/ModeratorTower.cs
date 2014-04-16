@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ShortCircuitTower : MonoBehaviour {
+public class ModeratorTower : MonoBehaviour {
 	TowerManager manager;
 	Transform turret;
 	Transform target;
@@ -25,7 +25,7 @@ public class ShortCircuitTower : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		target = manager.findTarget(transform, 0, range);		
+		target = manager.findTargetByHealth(transform, range, true);		
 		if (target != null) {
 			turret.LookAt(target.transform.position);
 			if (System.DateTime.Now.Ticks >= cooldownTimer) {
@@ -40,7 +40,7 @@ public class ShortCircuitTower : MonoBehaviour {
 					target.GetComponent<EnemyScript>().reduceSpeed(reduxSpeed, reduxSpeedDuration);
 				}
 				cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
-				Debug.DrawLine(turret.position, target.position, Color.cyan);
+				Debug.DrawLine(turret.position, target.position, Color.green);
 			}
 		}
 		else
