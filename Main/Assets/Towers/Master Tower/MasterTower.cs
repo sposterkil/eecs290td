@@ -13,13 +13,17 @@ public class MasterTower : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        GameObject targetLoc = hitPlatform();
+        GameObject targetLoc = PlatformUnderCursor();
         if(targetLoc != null){
-            PlaceTower(TestTower, targetLoc);
+            StartCoroutine(DrawTower(TestTower, targetLoc));
+            if(Input.GetMouseButtonDown(0)){
+                PlaceTower(TestTower, targetLoc);
+            }
         }
+
 	}
 
-    GameObject hitPlatform(){
+    GameObject PlatformUnderCursor(){
         Ray toCursor = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(toCursor, out hit)){
@@ -30,13 +34,22 @@ public class MasterTower : MonoBehaviour {
         return null;
     }
 
-    void PlaceTower(GameObject tower, GameObject towerBase){
-        GameObject wireframe = Instantiate(tower, towerBase.transform.position, Quaternion.identity) as GameObject;
-        wireframe.renderer.material.shader = wireframeShader;
-        wireframe.GetComponent<MonoBehaviour>().enabled = false;
-
-        if(Input.GetMouseButtonDown(0)){
-            wireframe.GetComponent<MonoBehaviour>().enabled = true;
+    IEnumerator DrawTower(GameObject tower, GameObject towerBase){
+        GameObject instTower = Instantiate(tower, towerBase.transform.position, Quaternion.identity) as GameObject;
+        Component[] towerComponents = instTower.GetComponents(typeof(Component));
+        MonoBehaviour[] towerScripts = instTower.GetComponents<MonoBehaviour>();
+        foreach(Component component in towerComponents){
+            component.renderer.material.shader = wireframeShader;
         }
+        foreach (MonoBehaviour script in towerScripts){
+            script.enabled = false;
+        }
+        yield return new WaitForSeconds(.01f);
+        Destroy(instTower);
+    }
+
+
+    GameObject PlaceTower(GameObject tower, GameObject towerBase){
+        return Instantiate(tower, towerBase.transform.position, Quaternion.identity) as GameObject;
     }
 }

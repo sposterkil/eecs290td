@@ -44,7 +44,6 @@ public class MouseOrbit : MonoBehaviour
 			y = ClampAngle(y, yMinLimit, yMaxLimit);
 
 			transform.rotation = Quaternion.Euler(y, x, 0);
-			// transform.position = (Quaternion.Euler(y, x, 0)) * new Vector3(0.0f, 0.0f, -distance) + target.position;
 		}
 	}
 
