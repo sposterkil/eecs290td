@@ -17,13 +17,13 @@ public class TowerManager : MonoBehaviour {
 		enemies = GameObject.FindGameObjectsWithTag("Enemy");
 	}
 
-	public Transform findTarget(Transform tower, float range) {
+	public Transform findTarget(Transform tower, float minrange, float maxrange) {
 		Transform target = null;
 		//If only a single enemy exists, only one potential target exists.
 		if (enemies.Length == 1) {
 			if (enemies[0] != null){
 				Vector3 dist = enemies[0].transform.position - tower.position;
-				if (dist.magnitude <= range)
+				if ((dist.magnitude >= minrange)&&(dist.magnitude <= maxrange))
 					target = enemies[0].transform;
 			}
 		}
@@ -55,7 +55,7 @@ public class TowerManager : MonoBehaviour {
 						enemy = enemies[i].transform;
 						distB = enemy.position - beacon.position;
 						distT = enemy.position - tower.position;
-						if (((indexOfLowest == -1)||(distB.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
+						if (((indexOfLowest == -1)||(distB.magnitude < distOfLowest))&&((distT.magnitude >= minrange)&&(distT.magnitude <= maxrange))) {
 							indexOfLowest = i;
 							distOfLowest = distB.magnitude;
 						}
@@ -76,7 +76,7 @@ public class TowerManager : MonoBehaviour {
 					if (enemies[i] != null) {
 						enemy = enemies[i].transform;
 						distT = enemy.position - tower.position;
-						if (((indexOfLowest == -1)||(distT.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
+						if (((indexOfLowest == -1)||(distT.magnitude < distOfLowest))&&((distT.magnitude >= minrange)&&(distT.magnitude <= maxrange))) {
 							indexOfLowest = i;
 							distOfLowest = distT.magnitude;
 						}
