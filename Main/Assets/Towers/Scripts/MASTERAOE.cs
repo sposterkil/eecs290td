@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WipeTower : MonoBehaviour {
+public class MASTERAOE : MonoBehaviour {
 	TowerManager manager;
 	Transform turret;
 	Vector3 target;

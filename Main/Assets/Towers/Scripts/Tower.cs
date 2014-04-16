@@ -25,7 +25,7 @@ public class Tower : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		target = manager.findTarget(transform, range);		
+		target = manager.findTarget(transform, 0, range);		
 		if (target != null) {
 			turret.LookAt(target.transform.position);
 			if (System.DateTime.Now.Ticks >= cooldownTimer) {

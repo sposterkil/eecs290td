@@ -17,14 +17,13 @@ public class TowerManager : MonoBehaviour {
 		enemies = GameObject.FindGameObjectsWithTag("Enemy");
 	}
 
-	public Transform findTarget(Transform tower, float range) {
+	public Transform findTarget(Transform tower, float minrange, float maxrange) {
 		Transform target = null;
-
 		//If only a single enemy exists, only one potential target exists.
 		if (enemies.Length == 1) {
 			if (enemies[0] != null){
 				Vector3 dist = enemies[0].transform.position - tower.position;
-				if (dist.magnitude <= range)
+				if ((dist.magnitude >= minrange)&&(dist.magnitude <= maxrange))
 					target = enemies[0].transform;
 			}
 		}
@@ -56,7 +55,7 @@ public class TowerManager : MonoBehaviour {
 						enemy = enemies[i].transform;
 						distB = enemy.position - beacon.position;
 						distT = enemy.position - tower.position;
-						if (((indexOfLowest == -1)||(distB.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
+						if (((indexOfLowest == -1)||(distB.magnitude < distOfLowest))&&((distT.magnitude >= minrange)&&(distT.magnitude <= maxrange))) {
 							indexOfLowest = i;
 							distOfLowest = distB.magnitude;
 						}
@@ -77,7 +76,7 @@ public class TowerManager : MonoBehaviour {
 					if (enemies[i] != null) {
 						enemy = enemies[i].transform;
 						distT = enemy.position - tower.position;
-						if (((indexOfLowest == -1)||(distT.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
+						if (((indexOfLowest == -1)||(distT.magnitude < distOfLowest))&&((distT.magnitude >= minrange)&&(distT.magnitude <= maxrange))) {
 							indexOfLowest = i;
 							distOfLowest = distT.magnitude;
 						}
@@ -90,5 +89,76 @@ public class TowerManager : MonoBehaviour {
 			}
 		}
 		return target;
+	}
+	
+	public Transform findTargetByProxy(Transform tower, float range) {
+		Transform target = null;
+		//If only a single enemy exists, only one potential target exists.
+		if (enemies.Length == 1) {
+			if (enemies[0] != null){
+				Vector3 dist = enemies[0].transform.position - tower.position;
+				if (dist.magnitude <= range)
+					target = enemies[0].transform;
+			}
+		}
+		else if (enemies.Length != 0) {
+			Transform enemy;
+			Vector3 distT;
+			int indexOfLowest = -1;
+			float distOfLowest = 0f;
+			for (int i = 0; i < enemies.Length; i++) {
+				if (enemies[i] != null) {
+					enemy = enemies[i].transform;
+					distT = enemy.position - tower.position;
+					if (((indexOfLowest == -1)||(distT.magnitude < distOfLowest))&&(distT.magnitude <= range)) {
+						indexOfLowest = i;
+						distOfLowest = distT.magnitude;
+					}
+				}
+			}
+			if (indexOfLowest != -1)
+				target = enemies[indexOfLowest].transform;
+			else
+				target = null;
+		}
+		return target;
+	}
+
+	public Vector3 findGroupTarget(Transform tower, float range) {
+		Vector3 target = tower.position;
+		Vector3 dist;
+		int counter = 0;;
+		for (int i = 0; i < enemies.Length; i++) {
+			if (enemies[i] != null) {
+				dist = enemies[i].transform.position - tower.position;
+				if (dist.magnitude <= range) {
+					if (counter == 0)
+						target = Vector3.zero;
+					target += enemies[i].transform.position;
+					counter++;
+				}
+			}
+		}
+		if (counter != 0)
+			target /= counter;
+		return target;
+	}
+	
+	public Transform[] findAOETargets(Vector3 target, float range) {
+		Transform[] targets = new Transform[enemies.Length];
+		Transform enemy;
+		Vector3 dist;
+		int currentIndex = 0;
+		for (int i = 0; i < enemies.Length; i++) {
+			if (enemies[i] != null) {
+				enemy = enemies[i].transform;
+				dist = enemy.position - target;
+				if (dist.magnitude <= range) {
+					targets[currentIndex] = enemy;
+					currentIndex++;
+				}				
+			}
+		}
+		return targets;
 	}
 }
