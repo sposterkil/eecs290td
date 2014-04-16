@@ -50,6 +50,7 @@ public class MasterTower : MonoBehaviour {
 
 
     GameObject PlaceTower(GameObject tower, GameObject towerBase){
+        towerBase.tag = "TowerBase_occupied";
         return Instantiate(tower, towerBase.transform.position, Quaternion.identity) as GameObject;
     }
 }
