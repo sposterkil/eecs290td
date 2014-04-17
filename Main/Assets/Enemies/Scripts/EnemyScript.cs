@@ -2,15 +2,11 @@
 using System.Collections;
 
 public class EnemyScript : MonoBehaviour {
-	public Transform virusTransform; //this object's position
 	
 	public int health;
 	public int defaultDamage;
 	public int defaultSpeed;
-	
-	GameObject[] stepnodes; // the list of nodes that are available to move to next
-	int step = 0; // the step number
-	GameObject nextNode;
+
 	public GameObject emitter; // an invisible object which will emit the death animation
  
 	float damage;
@@ -18,16 +14,20 @@ public class EnemyScript : MonoBehaviour {
 	float speed;
 	long speedduration;
 
+	// this objects target, node or itself (as in not moving)
+	Vector3 target;
+
 	void Start () {
 		damage = defaultDamage;
 		speed = defaultSpeed;
 		damageduration = -1;
 		speedduration = -1;
+		target = this.transform.position;
 	}
 
 	void Update () {
-		//Update poisition
-		transform.position =  Vector3.MoveTowards(transform.position, nextNode.transform.position, speed * Time.deltaTime);
+		//Move to the target
+		transform.position =  Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
 		//Update debuffs
 		if (damageduration != -1) {
@@ -43,7 +43,8 @@ public class EnemyScript : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	// apply damage to enemy
 	public void takeDamage(int damage) {
 		health -= damage;
 		if (health <= 0)
@@ -59,19 +60,16 @@ public class EnemyScript : MonoBehaviour {
 		speed = (1 - factor) * defaultSpeed;
 		speedduration = System.DateTime.Now.Ticks + (10000L * duration);
 	}
-	
+
+	// death things
 	void die() {
 		GameObject clone;
 		clone = Instantiate (emitter, transform.position, Quaternion.identity) as GameObject;
 		GameObject.Destroy(this.gameObject);
 	}
 
-	void OnTriggerEnter(Collider other) {
-		Debug.Log ("hit node");
-		step++;
-		stepnodes = GameObject.FindGameObjectsWithTag ("Step" + step + "nodes");
-		int next = Random.Range (1, 4);
-		//virusTransform.LookAt (stepnodes[2].transform, Vector3.up);
-		nextNode = stepnodes [next];
+	// set the target, can be called from elsewhere
+	public void setTarget(Vector3 newTarget) {
+		target = newTarget;
 	}
 }
