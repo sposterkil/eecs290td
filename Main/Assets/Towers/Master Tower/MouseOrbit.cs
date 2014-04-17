@@ -38,8 +38,12 @@ public class MouseOrbit : MonoBehaviour
 		mouseY = Input.mousePosition.y;
 		if (target)
 		{
-			x += (mouseX - centerX) * xSpeed * Time.deltaTime;
-			y -= (mouseY - centerY) * ySpeed * Time.deltaTime;
+			if(Mathf.Abs(mouseX - centerX) > (centerX / 2)){
+				x += (mouseX - centerX) * xSpeed * Time.deltaTime;
+			}
+			if(Mathf.Abs(mouseY - centerY) > (centerY / 2)){
+				y -= (mouseY - centerY) * ySpeed * Time.deltaTime;
+			}
 
 			y = ClampAngle(y, yMinLimit, yMaxLimit);
 
