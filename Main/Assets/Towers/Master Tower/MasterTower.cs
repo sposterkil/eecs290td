@@ -8,9 +8,6 @@ public class MasterTower : MonoBehaviour {
 	public int health;
 	public int coins;
 	public GameObject Hud;
-	public AudioSource damageSound;
-	public AudioSource towerPlaceSound;
-	public AudioSource cannotPlaceSound;
 
 	// Use this for initialization
 	void Start () {
@@ -22,14 +19,10 @@ public class MasterTower : MonoBehaviour {
         GameObject targetLoc = PlatformUnderCursor();
         if(targetLoc != null){
             StartCoroutine(DrawTower(TestTower, targetLoc));
+			if (coins > 0) {
           	  if(Input.GetMouseButtonDown(0)){
-				if (coins > 0) {
-					PlaceTower(TestTower, targetLoc);
-					coins--;
-					towerPlaceSound.Play ();
-				}
-				else {
-					cannotPlaceSound.Play ();
+				PlaceTower(TestTower, targetLoc);
+				coins--;
 				}
             }
         }
