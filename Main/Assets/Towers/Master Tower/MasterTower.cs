@@ -3,7 +3,6 @@ using System.Collections;
 
 public class MasterTower : MonoBehaviour {
 
-    public Shader wireframeShader;
     public GameObject TestTower;
 	public int health;
 	public int coins;
@@ -31,7 +30,7 @@ public class MasterTower : MonoBehaviour {
 		Hud.GetComponent<HudScript> ().updateCoins (coins);
 
 		// trigger for losing the game
-		if (health <= 0) 
+		if (health <= 0)
 			gameOver ();
 	}
 
@@ -50,9 +49,6 @@ public class MasterTower : MonoBehaviour {
         GameObject instTower = Instantiate(tower, towerBase.transform.position, Quaternion.identity) as GameObject;
         Component[] towerComponents = instTower.GetComponents(typeof(Component));
         MonoBehaviour[] towerScripts = instTower.GetComponents<MonoBehaviour>();
-        foreach(Component component in towerComponents){
-            component.renderer.material.shader = wireframeShader;
-        }
         foreach (MonoBehaviour script in towerScripts){
             script.enabled = false;
         }
