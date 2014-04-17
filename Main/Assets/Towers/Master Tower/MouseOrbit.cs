@@ -9,8 +9,8 @@ public class MouseOrbit : MonoBehaviour
 	float centerX = Screen.width / 2;
 	float centerY = Screen.height / 2;
 
-	float mouseX;
-	float mouseY;
+	float mouseX = Input.mousePosition.x;
+	float mouseY = Input.mousePosition.y;
 
 	public float xSpeed = 0.1f;
 	public float ySpeed = 0.1f;
@@ -27,7 +27,6 @@ public class MouseOrbit : MonoBehaviour
 		x = angles.y;
 		y = angles.x;
 
-
 		// Make the rigid body not change rotation
 		if (rigidbody)
 			rigidbody.freezeRotation = true;
@@ -39,17 +38,12 @@ public class MouseOrbit : MonoBehaviour
 		mouseY = Input.mousePosition.y;
 		if (target)
 		{
-			if(Mathf.Abs(mouseX - centerX) > centerX / 2){
-				x += (mouseX - centerX) * xSpeed * Time.deltaTime;
-			}
-			if(Mathf.Abs (mouseY - centerY) > centerY / 2){
-				y -= (mouseY - centerY) * ySpeed * Time.deltaTime;
-			}
+			x += (mouseX - centerX) * xSpeed * Time.deltaTime;
+			y -= (mouseY - centerY) * ySpeed * Time.deltaTime;
 
 			y = ClampAngle(y, yMinLimit, yMaxLimit);
 
 			transform.rotation = Quaternion.Euler(y, x, 0);
-			transform.position = (Quaternion.Euler(y, x, 0)) * new Vector3(0.0f, 0.0f, -distance) + target.position;
 		}
 	}
 
