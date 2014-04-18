@@ -46,7 +46,7 @@ public class MasterTower : MonoBehaviour {
     }
 
     IEnumerator DrawTower(GameObject tower, GameObject towerBase){
-        GameObject instTower = Instantiate(tower, towerBase.transform.position, Quaternion.identity) as GameObject;
+		GameObject instTower = Instantiate(tower, towerBase.transform.position - new Vector3(0, .5f, 0), Quaternion.identity) as GameObject;
         Component[] towerComponents = instTower.GetComponents(typeof(Component));
         MonoBehaviour[] towerScripts = instTower.GetComponents<MonoBehaviour>();
         foreach (MonoBehaviour script in towerScripts){
@@ -59,7 +59,7 @@ public class MasterTower : MonoBehaviour {
 
     GameObject PlaceTower(GameObject tower, GameObject towerBase){
         towerBase.tag = "TowerBase_occupied";
-        return Instantiate(tower, towerBase.transform.position, Quaternion.identity) as GameObject;
+        return Instantiate(tower, towerBase.transform.position - new Vector3(0, .5f, 0), Quaternion.identity) as GameObject;
     }
 
 	void OnTriggerEnter (Collider other) {
