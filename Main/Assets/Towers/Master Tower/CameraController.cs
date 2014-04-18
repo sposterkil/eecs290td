@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MouseOrbit : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
 	public Transform target;
 	public float distance = 0.0f;
@@ -21,8 +21,7 @@ public class MouseOrbit : MonoBehaviour
 	private float x = 0.0f;
 	private float y = 0.0f;
 
-	void Start ()
-	{
+	void Start (){
 		var angles = transform.eulerAngles;
 		x = angles.y;
 		y = angles.x;
