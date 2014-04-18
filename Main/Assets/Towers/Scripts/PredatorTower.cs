@@ -25,7 +25,7 @@ public class PredatorTower : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		target = manager.findTargetByHealth(transform, range, false);		
+		//target = manager.findTargetByHealth(transform, range, false);		
 		if (target != null) {
 			turret.LookAt(target.transform.position);
 			if (System.DateTime.Now.Ticks >= cooldownTimer) {

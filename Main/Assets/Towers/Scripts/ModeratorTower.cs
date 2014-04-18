@@ -25,7 +25,7 @@ public class ModeratorTower : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		target = manager.findTargetByHealth(transform, range, true);		
+		//target = manager.findTargetByHealth(transform, range, true);		
 		if (target != null) {
 			turret.LookAt(target.transform.position);
 			if (System.DateTime.Now.Ticks >= cooldownTimer) {

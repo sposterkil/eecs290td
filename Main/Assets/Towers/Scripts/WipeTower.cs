@@ -26,7 +26,7 @@ public class WipeTower : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		target = manager.findGroupTarget(transform, range);
+		//target = manager.findGroupTarget(transform, range);
 		if (target != transform.position) {
 			Transform[] targets = manager.findAOETargets(target, rangeAOE);
 			turret.LookAt(target);
