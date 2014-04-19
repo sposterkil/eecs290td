@@ -75,7 +75,7 @@ public class TowerScript : MonoBehaviour {
 					else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000)
 						laser.active = false;
 				}
-				else {
+				else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000) {
 					turret.LookAt(turret.position + new Vector3(0, 0, -1));
 					laser.active = false;
 				}
@@ -92,7 +92,7 @@ public class TowerScript : MonoBehaviour {
 					else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000)
 						laser.active = false;
 				}
-				else {
+				else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000) {
 					turret.LookAt(turret.position + new Vector3(0, 0, -1));
 					laser.active = false;
 				}
@@ -113,7 +113,7 @@ public class TowerScript : MonoBehaviour {
 					else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000)
 						laser.active = false;
 				}
-				else {
+				else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000) {
 					turret.LookAt(turret.position + new Vector3(0, 0, -1));
 					laser.active = false;
 				}
