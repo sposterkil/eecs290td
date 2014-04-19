@@ -4,6 +4,7 @@ using System.Collections;
 public class TowerScript : MonoBehaviour {
 	TowerManager manager;
 	Transform turret;
+	Transform laser;
 	Transform targetSingle;
 	Transform[] targetsAOE;
 	Vector3 targetArea;
@@ -32,6 +33,8 @@ public class TowerScript : MonoBehaviour {
 		transform.parent = GameObject.Find("Towers").transform;
 		manager = transform.parent.GetComponent<TowerManager>();
 		turret = transform.FindChild("Turret").FindChild("Turret1").transform;
+		laser = transform.transform.FindChild("Turret").FindChild("Turret1").FindChild("Turret1").FindChild("Laser");
+		laser.active = false;
 		transform.FindChild("Model1").FindChild("Base").renderer.material.color = color;
 		transform.FindChild("Turret").FindChild("Turret1").FindChild("Turret1").renderer.material.color = color;
 		targetSingle = null;
@@ -67,10 +70,15 @@ public class TowerScript : MonoBehaviour {
 						attack(targetSingle, false);
 						Debug.DrawLine(turret.position, targetSingle.position, color);
 						cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
+						laser.active = true;
 					}
+					else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000)
+						laser.active = false;
 				}
-				else
+				else {
 					turret.LookAt(turret.position + new Vector3(0, 0, -1));
+					laser.active = false;
+				}
 				break;
 			case 2: //Single Target, Single Shot, Resource
 				if (targetSingle != null) {
@@ -79,10 +87,15 @@ public class TowerScript : MonoBehaviour {
 						attack(targetSingle, true);
 						Debug.DrawLine(turret.position, targetSingle.position, color);
 						cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
+						laser.active = true;
 					}
+					else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000)
+						laser.active = false;
 				}
-				else
+				else {
 					turret.LookAt(turret.position + new Vector3(0, 0, -1));
+					laser.active = false;
+				}
 				break;
 			case 3: //AOE
 				if (targetsAOE.Length > 0) {
@@ -95,10 +108,15 @@ public class TowerScript : MonoBehaviour {
 						}
 						Debug.DrawLine(turret.position, targetArea, color);
 						cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
+						laser.active = true;
 					}
+					else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000)
+						laser.active = false;
 				}
-				else
+				else {
 					turret.LookAt(turret.position + new Vector3(0, 0, -1));
+					laser.active = false;
+				}
 				break;
 			case 4:
 				;

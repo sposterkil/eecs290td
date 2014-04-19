@@ -185,3 +185,11 @@
    }//end Laser On   
    
   }//end Update
+  
+  function turnOn() {
+	LaserOn = true;
+  }
+  
+  function turnOff() {
+	LaserOn = false;
+  }
