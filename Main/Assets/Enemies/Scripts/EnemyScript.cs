@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class EnemyScript : MonoBehaviour {
-	
+	public int value;
 	public int health;
 	public int defaultDamage;
 	public int defaultSpeed;
@@ -43,12 +43,14 @@ public class EnemyScript : MonoBehaviour {
 			}
 		}
 	}
-
-	// apply damage to enemy
-	public void takeDamage(int damage) {
+	
+	//Apply damage
+	public void takeDamage(int damage, int resources) {
 		health -= damage;
-		if (health <= 0)
+		if (health <=0) {
 			die();
+			GameObject.Find("MainTower").GetComponent<MasterTower>().addCoins(value + resources);
+		}
 	}
 	
 	public void reduceDamage(float factor, long duration) {

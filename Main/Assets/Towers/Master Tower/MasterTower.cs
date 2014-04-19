@@ -37,6 +37,10 @@ public class MasterTower : MonoBehaviour {
 		if (health <= 0)
 			gameOver ();
 	}
+	
+	public void addCoins(int num) {
+		coins += num;
+	}
 
     GameObject PlatformUnderCursor(){
         Ray toCursor = Camera.main.ScreenPointToRay(Input.mousePosition);

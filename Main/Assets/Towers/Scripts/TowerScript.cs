@@ -23,6 +23,7 @@ public class TowerScript : MonoBehaviour {
 	public float rangeMin;
 	public float rangeMax;
 	public float rangeAOE;
+	public int collection;
 	public float reduxDamage;
 	public int reduxDamageDuration;
 	public float reduxSpeed;
@@ -67,7 +68,7 @@ public class TowerScript : MonoBehaviour {
 				if (targetSingle != null) {
 					turret.LookAt(targetSingle.position);
 					if (System.DateTime.Now.Ticks >= cooldownTimer) {
-						attack(targetSingle, false);
+						attack(targetSingle);
 						Debug.DrawLine(turret.position, targetSingle.position, color);
 						cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
 						laser.active = true;
@@ -80,30 +81,13 @@ public class TowerScript : MonoBehaviour {
 					laser.active = false;
 				}
 				break;
-			case 2: //Single Target, Single Shot, Resource
-				if (targetSingle != null) {
-					turret.LookAt(targetSingle.position);
-					if (System.DateTime.Now.Ticks >= cooldownTimer) {
-						attack(targetSingle, true);
-						Debug.DrawLine(turret.position, targetSingle.position, color);
-						cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
-						laser.active = true;
-					}
-					else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000)
-						laser.active = false;
-				}
-				else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000) {
-					turret.LookAt(turret.position + new Vector3(0, 0, -1));
-					laser.active = false;
-				}
-				break;
-			case 3: //AOE
+			case 2: //AOE
 				if (targetsAOE.Length > 0) {
 					turret.LookAt(targetArea);
 					if (System.DateTime.Now.Ticks >= cooldownTimer) {
 						for (int i = 0; i < targetsAOE.Length; i++) {
 							if (targetsAOE[i] != null) {
-								attack(targetsAOE[i], false);
+								attack(targetsAOE[i]);
 							}
 						}
 						Debug.DrawLine(turret.position, targetArea, color);
@@ -117,6 +101,9 @@ public class TowerScript : MonoBehaviour {
 					turret.LookAt(turret.position + new Vector3(0, 0, -1));
 					laser.active = false;
 				}
+				break;
+			case 3:
+				;
 				break;
 			case 4:
 				;
@@ -142,12 +129,9 @@ public class TowerScript : MonoBehaviour {
 		}
 	}
 	
-	public void attack(Transform target, bool forResource) {
+	public void attack(Transform target) {
 		//Apply damage
-		if (forResource)
-			target.GetComponent<EnemyScript>().takeDamage(damage);
-		else
-			target.GetComponent<EnemyScript>().takeDamage(damage);
+		target.GetComponent<EnemyScript>().takeDamage(damage, collection);
 		//Apply damage reduction if applicable
 		if (reduxDamage != 0) {
 			target.GetComponent<EnemyScript>().reduceDamage(reduxDamage, reduxDamageDuration);
