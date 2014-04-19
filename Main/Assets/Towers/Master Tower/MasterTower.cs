@@ -7,10 +7,14 @@ public class MasterTower : MonoBehaviour {
 	public int health;
 	public int coins;
 	public GameObject Hud;
+	public Material platform;
 
+	int origHealth;
 	// Use this for initialization
 	void Start () {
-
+		origHealth = health;
+		// set the color back to bright blue at the start of the game
+		platform.SetColor ("_Color", new Color (0, 1, 1));
 	}
 
 	// Update is called once per frame
@@ -66,6 +70,11 @@ public class MasterTower : MonoBehaviour {
 		health--;
 		Debug.Log ("Main Base Damaged!!!");
 		Destroy (other.gameObject); // delete the virus
+
+		// update grid color based on remaining health
+		float colorUpdate = ((float)health / origHealth);
+		Debug.Log (colorUpdate);
+		platform.color = new Color((1 - colorUpdate), colorUpdate,colorUpdate);
 	}
 
 	void gameOver(){
