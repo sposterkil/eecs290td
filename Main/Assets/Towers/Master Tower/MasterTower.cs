@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MasterTower : MonoBehaviour {
 
-    public GameObject TestTower;
+    public GameObject activeTower;
 	public int health;
 	public int coins;
 	public GameObject Hud;
@@ -21,10 +21,10 @@ public class MasterTower : MonoBehaviour {
 	void Update () {
         GameObject targetLoc = PlatformUnderCursor();
         if(targetLoc != null){
-            StartCoroutine(DrawTower(TestTower, targetLoc));
+            StartCoroutine(DrawTower(activeTower, targetLoc));
 			if (coins > 0) {
           	  if(Input.GetMouseButtonDown(0)){
-				PlaceTower(TestTower, targetLoc);
+				PlaceTower(activeTower, targetLoc);
 				coins--;
 				}
             }
@@ -37,7 +37,7 @@ public class MasterTower : MonoBehaviour {
 		if (health <= 0)
 			gameOver ();
 	}
-	
+
 	public void addCoins(int num) {
 		coins += num;
 	}
