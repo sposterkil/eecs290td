@@ -4,35 +4,35 @@ using System.Collections;
 public class MasterTower : MonoBehaviour {
 
     public GameObject activeTower;
-	public int health;
-	public int coins;
-	public GameObject Hud;
-	public Material platform;
+    public int maxHealth;
+    public int coins;
+    public GameObject Hud;
+    public Material platform;
 
-	int origHealth;
+	private int health;
 	// Use this for initialization
 	void Start () {
-		origHealth = health;
+		health = maxHealth;
 		// set the color back to bright blue at the start of the game
 		platform.SetColor ("_Color", new Color (0, 1, 1));
+        Hud.GetComponent<HudScript>().updateHealth(health*100/maxHealth);
 	}
 
 	// Update is called once per frame
 	void Update () {
+        // Update Health and RAM counters
+        Hud.GetComponent<HudScript>().updateHealth (health*100/maxHealth);
+        Hud.GetComponent<HudScript>().updateCoins(coins);
+
         GameObject targetLoc = PlatformUnderCursor();
         if(targetLoc != null){
-            StartCoroutine(DrawTower(activeTower, targetLoc));
-			if (coins > 0) {
+            if (coins > 0) {
+                StartCoroutine(DrawTower(activeTower, targetLoc));
           	  if(Input.GetMouseButtonDown(0)){
 				PlaceTower(activeTower, targetLoc);
-				coins--;
 				}
             }
         }
-		// update health
-		Hud.GetComponent<HudScript> ().updateHealth (health);
-		Hud.GetComponent<HudScript> ().updateCoins (coins);
-
 		// trigger for losing the game
 		if (health <= 0)
 			gameOver ();
@@ -67,18 +67,19 @@ public class MasterTower : MonoBehaviour {
 
     GameObject PlaceTower(GameObject tower, GameObject towerBase){
         towerBase.tag = "TowerBase_occupied";
+        coins--;
         return Instantiate(tower, towerBase.transform.position - new Vector3(0, .5f, 0), Quaternion.identity) as GameObject;
     }
 
 	void OnTriggerEnter (Collider other) {
 		health--;
-		Debug.Log ("Main Base Damaged!!!");
-		Destroy (other.gameObject); // delete the virus
+        Debug.Log ("Main Base Damaged!!!");
+        Destroy (other.gameObject); // delete the virus
 
-		// update grid color based on remaining health
-		float colorUpdate = ((float)health / origHealth);
-		Debug.Log (colorUpdate);
-		platform.color = new Color((1 - colorUpdate), colorUpdate,colorUpdate);
+        // update grid color based on remaining health
+        float colorUpdate = ((float)health / maxHealth);
+        Debug.Log (colorUpdate);
+        platform.color = new Color((1 - colorUpdate), colorUpdate,colorUpdate);
 	}
 
 	void gameOver(){
