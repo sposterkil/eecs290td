@@ -1,0 +1,17 @@
+Here is all the information you need to know about the different towers:
+
+
+DEFENSE TOWER: Just your basic, virus-killing defense tower. Nothing special. Just lasers.
+
+GLITCH TOWER: This tower stuns viruses that it hits, dealing a reduced amount of damage but temporarily halting the viruses in place.
+
+COLLECTION TOWER: This tower reclaims RAM from dead viruses whose processes have ended, giving bonus credits for the purchase of towers to the player when a Collection Tower deals the
+killing blow to a virus.
+
+WIPE TOWER: This tower aims at the middle of its targeted group and deals raid area-of-effect damage in a small radius.
+
+SNIPER TOWER: This tower snipes viruses from afar, dealing a high amount of damage at a very high range at the cost of a long time period in between shots.
+
+MODERATOR TOWER: This tower equalizes the healths of the viruses passing through by prioritizing the virus in its range with the highest health.
+
+PREDATOR TOWER: This tower picks of viruses by prioritizing the virus in its range with the lowest health.
