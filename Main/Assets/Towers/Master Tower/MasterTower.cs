@@ -4,6 +4,7 @@ using System.Collections;
 public class MasterTower : MonoBehaviour {
 
     public GameObject activeTower;
+	public GameObject[] towers;
     public int maxHealth;
     public int coins;
     public GameObject Hud;
@@ -15,13 +16,16 @@ public class MasterTower : MonoBehaviour {
 		health = maxHealth;
 		// set the color back to bright blue at the start of the game
 		platform.SetColor ("_Color", new Color (0, 1, 1));
-        Hud.GetComponent<HudScript>().updateHealth(health*100/maxHealth);
+		activeTower = towers[0];
+		if (maxHealth != 0)
+			Hud.GetComponent<HudScript>().updateHealth(health*100/maxHealth);
 	}
 
 	// Update is called once per frame
 	void Update () {
         // Update Health and RAM counters
-        Hud.GetComponent<HudScript>().updateHealth (health*100/maxHealth);
+		if (maxHealth != 0)
+			Hud.GetComponent<HudScript>().updateHealth (health*100/maxHealth);
         Hud.GetComponent<HudScript>().updateCoins(coins);
 
         GameObject targetLoc = PlatformUnderCursor();
@@ -33,9 +37,33 @@ public class MasterTower : MonoBehaviour {
 				}
             }
         }
-		// trigger for losing the game
+		if (Input.GetKeyDown("1"))
+			activeTower = towers[0];
+		else if (Input.GetKeyDown("2"))
+			activeTower = towers[1];
+		else if (Input.GetKeyDown("3"))
+			activeTower = towers[2];
+		else if (Input.GetKeyDown("4"))
+			activeTower = towers[3];
+		else if (Input.GetKeyDown("5"))
+			activeTower = towers[4];
+		else if (Input.GetKeyDown("6"))
+			activeTower = towers[5];
+		else if (Input.GetKeyDown("7"))
+			activeTower = towers[6];
+		
+		//trigger for losing the game
 		if (health <= 0)
 			gameOver ();
+			
+		/*
+		if (Input.GetAxis("Mouse ScrollWheel") > 0) {
+			print("KEY");
+		}
+		else if (Input.GetAxis("Mouse ScrollWheel") < 0) {
+			print("-KEY");
+		}
+		*/
 	}
 
 	public void addCoins(int num) {
