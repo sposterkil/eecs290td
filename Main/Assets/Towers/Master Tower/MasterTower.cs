@@ -6,7 +6,7 @@ public class MasterTower : MonoBehaviour {
     public GameObject activeTower;
 	public GameObject[] towers;
     public int maxHealth;
-    public int coins;
+    public int RAM;
     public GameObject Hud;
     public Material platform;
 
@@ -26,14 +26,14 @@ public class MasterTower : MonoBehaviour {
         // Update Health and RAM counters
 		if (maxHealth != 0)
 			Hud.GetComponent<HudScript>().updateHealth (health*100/maxHealth);
-        Hud.GetComponent<HudScript>().updateCoins(coins);
+        Hud.GetComponent<HudScript>().updateRAM(RAM);
 
         GameObject targetLoc = PlatformUnderCursor();
         if(targetLoc != null){
-            if (coins > 0) {
+            if (RAM >= activeTower.GetComponent<TowerScript>().cost) {
                 StartCoroutine(DrawTower(activeTower, targetLoc));
-          	  if(Input.GetMouseButtonDown(0)){
-				PlaceTower(activeTower, targetLoc);
+          		if(Input.GetMouseButtonDown(0)){
+					PlaceTower(activeTower, targetLoc);
 				}
             }
         }
@@ -63,8 +63,8 @@ public class MasterTower : MonoBehaviour {
 			gameOver ();
 	}
 
-	public void addCoins(int num) {
-		coins += num;
+	public void addRAM(int num) {
+		RAM += num;
 	}
 
     GameObject PlatformUnderCursor(){
@@ -92,7 +92,7 @@ public class MasterTower : MonoBehaviour {
 
     GameObject PlaceTower(GameObject tower, GameObject towerBase){
         towerBase.tag = "TowerBase_occupied";
-        coins--;
+        RAM -= activeTower.GetComponent<TowerScript>().cost;
         return Instantiate(tower, towerBase.transform.position - new Vector3(0, .5f, 0), Quaternion.identity) as GameObject;
     }
 

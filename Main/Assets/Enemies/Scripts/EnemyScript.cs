@@ -49,7 +49,7 @@ public class EnemyScript : MonoBehaviour {
 		health -= damage;
 		if (health <=0) {
 			die();
-			GameObject.Find("MainTower").GetComponent<MasterTower>().addCoins(value + resources);
+			GameObject.Find("MainTower").GetComponent<MasterTower>().addRAM(value + resources);
 		}
 	}
 	

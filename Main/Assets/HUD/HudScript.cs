@@ -21,7 +21,7 @@ public class HudScript : MonoBehaviour {
 		healthText.text = "Infection: " + (100-number).ToString() + "%";
 	}
 
-	public void updateCoins (int number){
+	public void updateRAM (int number){
 		coinText.text = "RAM Remaining: " + number.ToString() + "MB";
 	}
 }

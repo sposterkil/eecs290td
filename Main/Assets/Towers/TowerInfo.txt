@@ -3,17 +3,17 @@ Here is all the information you need to know about the different towers:
 
 THREAD TOWER: This tower is the simplest tower, attacking a single virus at a moderate rate.
 
-GARBAGE COLLECTION TOWER: This tower reclaims RAM from dead viruses whose processes have ended, giving bonus credits for the purchase of towers to the player when a Collection Tower deals the killing blow to a virus.
-
 GLITCH TOWER: This tower stuns viruses that it hits, dealing a reduced amount of damage but temporarily stopping the viruses in place.
 
-BREAK TOWER: This tower snipes viruses from afar, dealing a high amount of damage at a very high range at the cost of a long time period in between shots.
-
-WIPE TOWER: This tower aims at the middle of its targeted group and deals raid area-of-effect damage in a small radius.
+GARBAGE COLLECTION TOWER: This tower reclaims RAM from dead viruses whose processes have ended, giving bonus credits for the purchase of towers to the player when a Collection Tower deals the killing blow to a virus.
 
 PROCESS MODERATOR TOWER: This tower monitors and equalizes the healths of the viruses passing through by prioritizing the virus in its range with the highest health.
 
 PROCESS TERMINATOR TOWER: This tower picks off and ends specific viruses by prioritizing the virus in its range with the lowest health.
+
+BREAK TOWER: This tower snipes viruses from afar, dealing a high amount of damage at a very high range at the cost of a long time period in between shots.
+
+WIPE TOWER: This tower aims at the middle of its targeted group and deals raid area-of-effect damage in a small radius.
 
 MULTITHREAD TOWER: This tower is multithreaded, able to focus up to three viruses at once.
 

@@ -10,7 +10,9 @@ public class TowerScript : MonoBehaviour {
 	Vector3 targetArea;
 
 	long cooldownTimer;
-	
+
+	public int cost;
+
 	public enum Targeting {
 		SingleTarget, SingleTargetByProxy, SingleTargetByHighestHealth, SingleTargetByLowestHealth, AOE
 	};
