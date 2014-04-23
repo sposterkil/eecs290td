@@ -59,8 +59,10 @@ public class EnemyScript : MonoBehaviour {
 	}
 	
 	public void reduceSpeed(float factor, long duration) {
-		speed = (1 - factor) * defaultSpeed;
-		speedduration = System.DateTime.Now.Ticks + (10000L * duration);
+		if ((1 - factor) < speed) {
+			speed = (1 - factor) * defaultSpeed;
+			speedduration = System.DateTime.Now.Ticks + (10000L * duration);
+		}
 	}
 
 	// death things

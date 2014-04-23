@@ -15,7 +15,7 @@ BREAK TOWER: This tower snipes viruses from afar, dealing a high amount of damag
 
 WIPE TOWER: This tower aims at the middle of its targeted group and deals raid area-of-effect damage in a small radius.
 
-MULTITHREAD TOWER: This tower is multithreaded, able to focus up to three viruses at once.
+LAG TOWER: This tower emits pulses of lag, slowing viruses that are hit by the pulse. Viruses that are glitched will ignire this pulse.
 
 MEMORY TOWER: This tower recalls its attacking process in memory as it attacks in rapid succession, allowing the tower to reduce its cooldown progressively so long as an in-range virus exists for it when it's ready to attack.
 
