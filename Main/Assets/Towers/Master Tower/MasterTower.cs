@@ -51,19 +51,16 @@ public class MasterTower : MonoBehaviour {
 			activeTower = towers[5];
 		else if (Input.GetKeyDown("7"))
 			activeTower = towers[6];
+		else if (Input.GetKeyDown("8"))
+			activeTower = towers[7];
+		else if (Input.GetKeyDown("9"))
+			activeTower = towers[8];
+		else if (Input.GetKeyDown("0"))
+			activeTower = towers[9];
 		
 		//trigger for losing the game
 		if (health <= 0)
 			gameOver ();
-			
-		/*
-		if (Input.GetAxis("Mouse ScrollWheel") > 0) {
-			print("KEY");
-		}
-		else if (Input.GetAxis("Mouse ScrollWheel") < 0) {
-			print("-KEY");
-		}
-		*/
 	}
 
 	public void addCoins(int num) {

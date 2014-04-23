@@ -1,17 +1,22 @@
 Here is all the information you need to know about the different towers:
 
 
-DEFENSE TOWER: Just your basic, virus-killing defense tower. Nothing special. Just lasers.
+THREAD TOWER: This tower is the simplest tower, attacking a single virus at a moderate rate.
 
-GLITCH TOWER: This tower stuns viruses that it hits, dealing a reduced amount of damage but temporarily halting the viruses in place.
+GARBAGE COLLECTION TOWER: This tower reclaims RAM from dead viruses whose processes have ended, giving bonus credits for the purchase of towers to the player when a Collection Tower deals the killing blow to a virus.
 
-COLLECTION TOWER: This tower reclaims RAM from dead viruses whose processes have ended, giving bonus credits for the purchase of towers to the player when a Collection Tower deals the
-killing blow to a virus.
+GLITCH TOWER: This tower stuns viruses that it hits, dealing a reduced amount of damage but temporarily stopping the viruses in place.
+
+BREAK TOWER: This tower snipes viruses from afar, dealing a high amount of damage at a very high range at the cost of a long time period in between shots.
 
 WIPE TOWER: This tower aims at the middle of its targeted group and deals raid area-of-effect damage in a small radius.
 
-SNIPER TOWER: This tower snipes viruses from afar, dealing a high amount of damage at a very high range at the cost of a long time period in between shots.
+PROCESS MODERATOR TOWER: This tower monitors and equalizes the healths of the viruses passing through by prioritizing the virus in its range with the highest health.
 
-MODERATOR TOWER: This tower equalizes the healths of the viruses passing through by prioritizing the virus in its range with the highest health.
+PROCESS TERMINATOR TOWER: This tower picks off and ends specific viruses by prioritizing the virus in its range with the lowest health.
 
-PREDATOR TOWER: This tower picks of viruses by prioritizing the virus in its range with the lowest health.
+MULTITHREAD TOWER: This tower is multithreaded, able to focus up to three viruses at once.
+
+MEMORY TOWER: This tower recalls its attacking process in memory as it attacks in rapid succession, allowing the tower to reduce its cooldown progressively so long as an in-range virus exists for it when it's ready to attack.
+
+LOAD TOWER: This tower fires a massive processing load onto nearby viruses, dealing a massive amount of damage that is divided evenly among all viruses hit.
