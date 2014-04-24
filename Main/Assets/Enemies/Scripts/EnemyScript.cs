@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class EnemyScript : MonoBehaviour {
-	public int value;
+	public int value; // how much ram this enemy is worth
 	public int health;
 	public int defaultDamage;
 	public int defaultSpeed;

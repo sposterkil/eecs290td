@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 public class EmitterScript : MonoBehaviour {
 
+	public AudioSource deathSound;
 	public float lifespan = 10f;
-	// Update is called once per frame
+
+	void Start () {
+		deathSound.Play ();
+		}
+
 	void Update () {
 
 		lifespan -= Time.deltaTime;
