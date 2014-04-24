@@ -108,6 +108,9 @@ public class MasterTower : MonoBehaviour {
 	}
 
 	void gameOver(){
-
+		GameObject[] remainingEnemies = GameObject.FindGameObjectsWithTag ("enemy");
+		for (int i = 0; i < remainingEnemies.Length; i++) { // destroy all
+			Destroy(remainingEnemies[i]);
+		}
 	}
 }
