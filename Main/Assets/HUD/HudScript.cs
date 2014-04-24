@@ -10,10 +10,12 @@ public class HudScript : MonoBehaviour {
 
 	private int maxHealth;
 	float timer = 300; // 5 minutes
+	bool activeTimer;
 
 	public GameObject platform;
 
 	void Start () {
+		activeTimer = true;
 		messageText.text = "_Initializing";
 		InvokeRepeating ("Spawn1", 15.2f, 1.5f); // spawn for a bit 
 		InvokeRepeating ("Spawn3", 50.0f, 0.5f);
@@ -23,7 +25,9 @@ public class HudScript : MonoBehaviour {
 	 
 	// Update is called once per frame
 	void Update () {
-		timer -= Time.deltaTime;
+		if (activeTimer == true) {
+			timer -= Time.deltaTime;
+		}
 		timerText.text = "_"+timer.ToString ();		
 
 		if (294 > timer && timer > 292) //@6-8
@@ -73,6 +77,7 @@ public class HudScript : MonoBehaviour {
 	public void gameOverMessage() {
 		CancelInvoke ();
 		string Score = timer.ToString ();
+		activeTimer = false;
 		messageText.text = "_Game Over - Score " + Score;
 	}
 
