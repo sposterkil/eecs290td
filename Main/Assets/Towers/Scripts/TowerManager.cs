@@ -190,6 +190,7 @@ public class TowerManager : MonoBehaviour {
 		Transform enemy;
 		Vector3 dist;
 		int currentIndex = 0;
+		bool addition = false;
 		for (int i = 0; i < enemies.Length; i++) {
 			if (enemies[i] != null) {
 				enemy = enemies[i].transform;
@@ -197,9 +198,12 @@ public class TowerManager : MonoBehaviour {
 				if (dist.magnitude <= range) {
 					targets[currentIndex] = enemy;
 					currentIndex++;
+					addition = true;
 				}				
 			}
 		}
-		return targets;
+		if (addition)
+			return targets;
+		return new Transform[0];
 	}
 }
