@@ -9,10 +9,15 @@ public class TowerScript : MonoBehaviour {
 	Transform[] targetsAOE;
 	Vector3 targetArea;
 
+	long time;
 	long cooldownTimer;
-	
+	long chargeTimer;
+	int currentCooldown;
+
+	public int cost;
+
 	public enum Targeting {
-		SingleTarget, SingleTargetByProxy, SingleTargetByHighestHealth, SingleTargetByLowestHealth, AOE
+		SingleTarget, SingleTargetByProxy, SingleTargetByHighestHealth, SingleTargetByLowestHealth, AOE, AOEFromTower
 	};
 	public Targeting targeting;
 
@@ -20,6 +25,8 @@ public class TowerScript : MonoBehaviour {
 	public int behaviourSet;
 	public int damage;
 	public int cooldown;
+	public int cooldownRamp;
+	public int minCooldown;
 	public float rangeMin;
 	public float rangeMax;
 	public float rangeAOE;
@@ -35,16 +42,19 @@ public class TowerScript : MonoBehaviour {
 		manager = transform.parent.GetComponent<TowerManager>();
 		turret = transform.FindChild("Turret").FindChild("Turret1").transform;
 		laser = transform.transform.FindChild("Turret").FindChild("Turret1").FindChild("Turret1").FindChild("Laser");
-		laser.active = false;
+		laser.gameObject.SetActive(false);
 		transform.FindChild("Model1").FindChild("Base").renderer.material.color = color;
 		transform.FindChild("Turret").FindChild("Turret1").FindChild("Turret1").renderer.material.color = color;
 		targetSingle = null;
 		targetsAOE = null;
 		targetArea = Vector3.zero;
+		if (behaviourSet == 3)
+			turret.LookAt(turret.position + new Vector3(0, 1, 0));
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		time = System.DateTime.Now.Ticks;
 		switch (targeting) {
 			case Targeting.SingleTarget:
 				targetSingle = manager.findTarget(transform, rangeMin, rangeMax);
@@ -62,69 +72,117 @@ public class TowerScript : MonoBehaviour {
 				targetArea = manager.findGroupTarget(transform, rangeMin, rangeMax);
 				targetsAOE = manager.findAOETargets(targetArea, rangeAOE);
 				break;
+			case Targeting.AOEFromTower:
+				targetsAOE = manager.findAOETargets(transform.position, rangeAOE);
+				break;
 		}
 		switch (behaviourSet) {
 			case 1: //Single Target, Single Shot
 				if (targetSingle != null) {
 					turret.LookAt(targetSingle.position);
-					if (System.DateTime.Now.Ticks >= cooldownTimer) {
+					if (time >= cooldownTimer) {
 						attack(targetSingle);
-						Debug.DrawLine(turret.position, targetSingle.position, color);
-						cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
-						laser.active = true;
+						cooldownTimer = time + (10000 * cooldown);
+						laser.gameObject.SetActive(true);
 					}
-					else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000)
-						laser.active = false;
+					else if (time >= cooldownTimer - (10000 * cooldown) + 500000)
+						laser.gameObject.SetActive(false);
 				}
-				else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000) {
+				else if (time >= cooldownTimer - (10000 * cooldown) + 500000) {
 					turret.LookAt(turret.position + new Vector3(0, 0, -1));
-					laser.active = false;
+					laser.gameObject.SetActive(false);
 				}
 				break;
 			case 2: //AOE
 				if (targetsAOE.Length > 0) {
 					turret.LookAt(targetArea);
-					if (System.DateTime.Now.Ticks >= cooldownTimer) {
+					if (time >= cooldownTimer) {
 						for (int i = 0; i < targetsAOE.Length; i++) {
 							if (targetsAOE[i] != null) {
 								attack(targetsAOE[i]);
 							}
 						}
-						Debug.DrawLine(turret.position, targetArea, color);
-						cooldownTimer = System.DateTime.Now.Ticks + (10000 * cooldown);
-						laser.active = true;
+						cooldownTimer = time + (10000 * cooldown);
+						laser.gameObject.SetActive(true);
 					}
-					else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000)
-						laser.active = false;
+					else if (time >= cooldownTimer - (10000 * cooldown) + 500000)
+						laser.gameObject.SetActive(false);
 				}
-				else if (System.DateTime.Now.Ticks >= cooldownTimer - (10000 * cooldown) + 500000) {
+				else if (time >= cooldownTimer - (10000 * cooldown) + 500000) {
 					turret.LookAt(turret.position + new Vector3(0, 0, -1));
-					laser.active = false;
+					laser.gameObject.SetActive(false);
 				}
 				break;
-			case 3:
-				;
+			case 3: //AOEFromTower
+				if (System.DateTime.Now.Ticks >= cooldownTimer) {
+					for (int i = 0; i < targetsAOE.Length; i++) {
+						if (targetsAOE[i] != null) {
+							attack(targetsAOE[i]);
+						}
+					}
+					cooldownTimer = time + (10000 * cooldown);
+					laser.gameObject.SetActive(true);
+				}
+				else if (time >= cooldownTimer - (10000 * cooldown) + 500000) {
+					laser.gameObject.SetActive(false);
+				}
 				break;
-			case 4:
-				;
+			case 4: //Single Target, Single Shot, Ramped Speed
+				if (targetSingle != null) {
+					turret.LookAt(targetSingle.position);
+					if (time >= cooldownTimer) {
+						attack(targetSingle);
+						currentCooldown -= cooldownRamp;
+						if (currentCooldown < minCooldown)
+							currentCooldown = minCooldown;
+						cooldownTimer = time + (10000 * currentCooldown);
+						laser.gameObject.SetActive(true);
+					}
+					else if (time >= cooldownTimer - (10000 * currentCooldown) + 500000)
+						laser.gameObject.SetActive(false);
+				}
+				else {
+					currentCooldown = cooldown;
+					if (time >= cooldownTimer - (10000 * currentCooldown) + 500000) {
+						turret.LookAt(turret.position + new Vector3(0, 0, -1));
+						laser.gameObject.SetActive(false);
+					}
+				}
 				break;
-			case 5:
-				;
-				break;
-			case 6:
-				;
-				break;
-			case 7:
-				;
-				break;
-			case 8:
-				;
-				break;
-			case 9:
-				;
-				break;
-			case 10:
-				;
+			case 5: //Charge Shot
+				if (targetsAOE.Length > 0) {
+					if (time >= cooldownTimer) {
+						turret.LookAt(targetArea);
+						//Start charge-up if not started
+						if (chargeTimer == 0) {
+							chargeTimer = time + (10000 * 2000);
+						}
+						if (time >= chargeTimer) {
+							int count = 0;
+							for (int i = 0; i < targetsAOE.Length; i++) {
+								if (targetsAOE[i] != null) {
+									count++;
+								}
+							}
+							int indivdamage = damage / count;
+							for (int i = 0; i < targetsAOE.Length; i++) {
+								if (targetsAOE[i] != null) {
+									attackForDamage(targetsAOE[i], indivdamage);
+								}
+							}
+							cooldownTimer = time + (10000 * cooldown);
+							chargeTimer = 0;
+							laser.gameObject.SetActive(true);
+						}
+					}
+					else if (time >= cooldownTimer - (10000 * cooldown) + 500000)
+						laser.gameObject.SetActive(false);
+				}
+				else if (time >= cooldownTimer - (10000 * cooldown) + 500000) {
+					turret.LookAt(turret.position + new Vector3(0, 0, -1));
+					laser.gameObject.SetActive(false);
+					chargeTimer = 0;
+				}
 				break;
 		}
 	}
@@ -140,5 +198,9 @@ public class TowerScript : MonoBehaviour {
 		if (reduxSpeed != 0) {
 			target.GetComponent<EnemyScript>().reduceSpeed(reduxSpeed, reduxSpeedDuration);
 		}
+	}
+
+	public void attackForDamage(Transform target, int d) {
+		target.GetComponent<EnemyScript>().takeDamage(d, collection);
 	}
 }

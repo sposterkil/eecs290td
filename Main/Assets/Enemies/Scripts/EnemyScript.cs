@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class EnemyScript : MonoBehaviour {
-	public int value;
+	public int value; // how much ram this enemy is worth
 	public int health;
 	public int defaultDamage;
 	public int defaultSpeed;
@@ -49,7 +49,7 @@ public class EnemyScript : MonoBehaviour {
 		health -= damage;
 		if (health <=0) {
 			die();
-			GameObject.Find("MainTower").GetComponent<MasterTower>().addCoins(value + resources);
+			GameObject.Find("MainTower").GetComponent<MasterTower>().addRAM(value + resources);
 		}
 	}
 	
@@ -59,8 +59,10 @@ public class EnemyScript : MonoBehaviour {
 	}
 	
 	public void reduceSpeed(float factor, long duration) {
-		speed = (1 - factor) * defaultSpeed;
-		speedduration = System.DateTime.Now.Ticks + (10000L * duration);
+		if ((1 - factor) < speed) {
+			speed = (1 - factor) * defaultSpeed;
+			speedduration = System.DateTime.Now.Ticks + (10000L * duration);
+		}
 	}
 
 	// death things
