@@ -18,12 +18,11 @@ public class HudScript : MonoBehaviour {
 		activeTimer = true;
 		messageText.text = "Initializing";
 		InvokeRepeating ("Spawn1", 15.2f, 1.5f); // spawn for a bit 
-		InvokeRepeating ("Spawn3", 50.0f, 0.5f);
-		InvokeRepeating ("Spawn2", 74.0f, 5.0f);
-		InvokeRepeating ("Spawn1", 120.0f, 2.0f);
-		InvokeRepeating ("Spawn3", 160.0f, 0.5f);
-		InvokeRepeating ("Spawn2", 200.0f, 2.0f);
-		InvokeRepeating ("Spawn3", 250.0f, 0.5f);
+		InvokeRepeating ("Spawn3", 50.0f, 1.0f);
+		InvokeRepeating ("Spawn2", 74.0f, 10.0f);
+		InvokeRepeating ("Spawn1", 120.0f, 1.5f); 
+		InvokeRepeating ("Spawn3", 180.0f, 1.0f);
+		InvokeRepeating ("Spawn2", 250.0f, 10.0f);
 	}
 	 
 	// Update is called once per frame
