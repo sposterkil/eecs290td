@@ -106,8 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a56a92a17f84113961b9f996d09f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isQuit: 1
-  isStart: 0
 --- !u!102 &296064129
 TextMesh:
   serializedVersion: 3
@@ -197,8 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fb3b72aec444078a2b99116d736847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isQuit: 1
-  isStart: 0
 --- !u!1 &1058529349
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,8 +366,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a56a92a17f84113961b9f996d09f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isQuit: 0
-  isStart: 1
 --- !u!102 &1507764702
 TextMesh:
   serializedVersion: 3
@@ -461,8 +455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fb3b72aec444078a2b99116d736847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isQuit: 0
-  isStart: 1
 --- !u!1 &1635275535
 GameObject:
   m_ObjectHideFlags: 0
