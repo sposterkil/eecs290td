@@ -74,8 +74,4 @@ public class MapSpawner2 : MonoBehaviour {
 			break;
 		}
 	}
-
-	public void spawn(int virus, int location) {
-
-	}
 }

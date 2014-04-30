@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HudScript : MonoBehaviour {
+public class HudScript2 : MonoBehaviour {
 
 	public TextMesh healthText;
 	public TextMesh coinText;
@@ -60,7 +60,7 @@ public class HudScript : MonoBehaviour {
 		if (234 > timer ) //@74 forever
 			messageText.text = "end of line";
 
-		timerText.text = timer.ToString();
+		timerText.text = timer.ToString();  // updates the timer
 	}
 
 	public void updateHealth (int number){

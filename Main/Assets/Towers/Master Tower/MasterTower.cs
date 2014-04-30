@@ -9,6 +9,7 @@ public class MasterTower : MonoBehaviour {
     public int RAM;
     public GameObject Hud;
     public Material platform;
+	public int      Level;
 
 	private int health;
 	// Use this for initialization
@@ -17,16 +18,30 @@ public class MasterTower : MonoBehaviour {
 		// set the color back to bright blue at the start of the game
 		platform.SetColor ("_Color", new Color (0, 1, 1));
 		activeTower = towers[0];
-		if (maxHealth != 0)
+		// if we are at level 1
+		if (maxHealth != 0 && Level == 1) 
 			Hud.GetComponent<HudScript>().updateHealth(health*100/maxHealth);
+		// if we are at level 2
+		if (maxHealth != 0 && Level == 2) 
+			Hud.GetComponent<HudScript2>().updateHealth(health*100/maxHealth);
 	}
 
 	// Update is called once per frame
 	void Update () {
-        // Update Health and RAM counters
-		if (maxHealth != 0)
-			Hud.GetComponent<HudScript>().updateHealth (health*100/maxHealth);
-        Hud.GetComponent<HudScript>().updateRAM(RAM);
+    
+		// Update Health and RAM counters for level 1
+		if (Level == 1) {
+			if (maxHealth != 0)
+				Hud.GetComponent<HudScript> ().updateHealth (health * 100 / maxHealth);
+			Hud.GetComponent<HudScript> ().updateRAM (RAM);
+		}
+
+		// Update Health and RAM counters for level 1
+		if (Level == 2) {
+			if (maxHealth != 0)
+				Hud.GetComponent<HudScript2> ().updateHealth (health * 100 / maxHealth);
+			Hud.GetComponent<HudScript2> ().updateRAM (RAM);
+		}
 
         GameObject targetLoc = PlatformUnderCursor();
         if(targetLoc != null){
