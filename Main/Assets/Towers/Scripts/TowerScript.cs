@@ -35,6 +35,7 @@ public class TowerScript : MonoBehaviour {
 	public int reduxDamageDuration;
 	public float reduxSpeed;
 	public int reduxSpeedDuration;
+	public AudioSource shotSound;
 
 	// Use this for initialization
 	void Start () {
@@ -81,6 +82,7 @@ public class TowerScript : MonoBehaviour {
 				if (targetSingle != null) {
 					turret.LookAt(targetSingle.position);
 					if (time >= cooldownTimer) {
+					shotSound.Play ();
 						attack(targetSingle);
 						cooldownTimer = time + (10000 * cooldown);
 						laser.gameObject.SetActive(true);
@@ -99,6 +101,7 @@ public class TowerScript : MonoBehaviour {
 					if (time >= cooldownTimer) {
 						for (int i = 0; i < targetsAOE.Length; i++) {
 							if (targetsAOE[i] != null) {
+							shotSound.Play ();
 								attack(targetsAOE[i]);
 							}
 						}
@@ -117,6 +120,7 @@ public class TowerScript : MonoBehaviour {
 				if (System.DateTime.Now.Ticks >= cooldownTimer) {
 					for (int i = 0; i < targetsAOE.Length; i++) {
 						if (targetsAOE[i] != null) {
+						shotSound.Play ();
 							attack(targetsAOE[i]);
 						}
 					}
@@ -131,6 +135,7 @@ public class TowerScript : MonoBehaviour {
 				if (targetSingle != null) {
 					turret.LookAt(targetSingle.position);
 					if (time >= cooldownTimer) {
+					shotSound.Play ();
 						attack(targetSingle);
 						currentCooldown -= cooldownRamp;
 						if (currentCooldown < minCooldown)
@@ -167,6 +172,7 @@ public class TowerScript : MonoBehaviour {
 							int indivdamage = damage / count;
 							for (int i = 0; i < targetsAOE.Length; i++) {
 								if (targetsAOE[i] != null) {
+								shotSound.Play ();
 									attackForDamage(targetsAOE[i], indivdamage);
 								}
 							}

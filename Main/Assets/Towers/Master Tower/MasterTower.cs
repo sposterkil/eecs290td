@@ -10,6 +10,7 @@ public class MasterTower : MonoBehaviour {
     public GameObject Hud;
     public Material platform;
 	public int      Level;
+	public AudioSource hurtSound;
 
 	private int health;
 	// Use this for initialization
@@ -31,15 +32,11 @@ public class MasterTower : MonoBehaviour {
     
 		// Update Health and RAM counters for level 1
 		if (Level == 1) {
-			if (maxHealth != 0)
-				Hud.GetComponent<HudScript> ().updateHealth (health * 100 / maxHealth);
 			Hud.GetComponent<HudScript> ().updateRAM (RAM);
 		}
 
 		// Update Health and RAM counters for level 1
 		if (Level == 2) {
-			if (maxHealth != 0)
-				Hud.GetComponent<HudScript2> ().updateHealth (health * 100 / maxHealth);
 			Hud.GetComponent<HudScript2> ().updateRAM (RAM);
 		}
 
@@ -113,6 +110,7 @@ public class MasterTower : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		health--;
+		hurtSound.Play ();
         Debug.Log ("Main Base Damaged!!!");
         Destroy (other.gameObject); // delete the virus
 
@@ -120,6 +118,20 @@ public class MasterTower : MonoBehaviour {
         float colorUpdate = ((float)health / maxHealth);
         Debug.Log (colorUpdate);
         platform.color = new Color((1 - colorUpdate), colorUpdate,colorUpdate);
+
+		// do the health update here
+		
+		// Update Health and RAM counters for level 1
+		if (Level == 1) {
+			if (maxHealth != 0)
+				Hud.GetComponent<HudScript> ().updateHealth (health * 100 / maxHealth);
+		}
+		
+		// Update Health and RAM counters for level 1
+		if (Level == 2) {
+			if (maxHealth != 0)
+				Hud.GetComponent<HudScript2> ().updateHealth (health * 100 / maxHealth);
+		}
 	}
 
 	void gameOver(){

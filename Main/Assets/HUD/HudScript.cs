@@ -20,7 +20,7 @@ public class HudScript : MonoBehaviour {
 		InvokeRepeating ("Spawn1", 15.2f, 1.5f); // spawn for a bit 
 		InvokeRepeating ("Spawn3", 50.0f, 0.5f);
 		InvokeRepeating ("Spawn2", 74.0f, 5.0f);
-
+		InvokeRepeating ("Spawn1", 120.0f, 2.0f);
 	}
 	 
 	// Update is called once per frame
@@ -30,13 +30,13 @@ public class HudScript : MonoBehaviour {
 		}
 
 		if (294 > timer && timer > 292) //@6-8
-			messageText.text = "Port 8023 Opening";
+			messageText.text = "Port 8023 Opening...4";
 		if (292 > timer && timer > 290) //@8-10
-			messageText.text = "Port 8023 Opening.";
+			messageText.text = "Port 8023 Opening...3";
 		if (290 > timer && timer > 288) //@10-12
-			messageText.text = "Port 8023 Opening..";
+			messageText.text = "Port 8023 Opening...2";
 		if (288 > timer && timer > 286) //@12-14
-			messageText.text = "Port 8023 Opening...";	
+			messageText.text = "Port 8023 Opening...1";	
 		if (285 > timer && timer > 255) //@15-45 open port for 30
 			messageText.text = "Traffic: Port 8023";
 		if (255 > timer && timer > 254) //@45-46 
@@ -57,8 +57,20 @@ public class HudScript : MonoBehaviour {
 			messageText.text = "Resource Hogs...2";
 		if (233 > timer && timer > 234) //@73-74
 			messageText.text = "Resource Hogs...1";
-		if (234 > timer ) //@74 forever
+		if (234 > timer && timer > 005) //@74 forever
 			messageText.text = "end of line";
+		if (005 > timer && timer > 004)
+			messageText.text = "Next Level in 5";
+		if (004 > timer && timer > 003) 
+			messageText.text = "Next Level in 4";
+		if (003 > timer && timer > 002) 
+			messageText.text = "Next Level in 3";
+		if (002 > timer && timer > 001) 
+			messageText.text = "Next Level in 2";
+		if (001 > timer && timer > 000) 
+			messageText.text = "Next Level in 1";
+		if (000 > timer)
+			Application.LoadLevel ("Level2");
 
 		timerText.text = timer.ToString();
 	}

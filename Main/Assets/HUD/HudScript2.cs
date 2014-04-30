@@ -30,13 +30,13 @@ public class HudScript2 : MonoBehaviour {
 		}
 
 		if (294 > timer && timer > 292) //@6-8
-			messageText.text = "Port 8023 Opening";
+			messageText.text = "Port 8023 Opening...4";
 		if (292 > timer && timer > 290) //@8-10
-			messageText.text = "Port 8023 Opening.";
+			messageText.text = "Port 8023 Opening...3";
 		if (290 > timer && timer > 288) //@10-12
-			messageText.text = "Port 8023 Opening..";
+			messageText.text = "Port 8023 Opening...2";
 		if (288 > timer && timer > 286) //@12-14
-			messageText.text = "Port 8023 Opening...";	
+			messageText.text = "Port 8023 Opening...1";	
 		if (285 > timer && timer > 255) //@15-45 open port for 30
 			messageText.text = "Traffic: Port 8023";
 		if (255 > timer && timer > 254) //@45-46 
@@ -57,8 +57,9 @@ public class HudScript2 : MonoBehaviour {
 			messageText.text = "Resource Hogs...2";
 		if (233 > timer && timer > 234) //@73-74
 			messageText.text = "Resource Hogs...1";
-		if (234 > timer ) //@74 forever
+		if (234 > timer && timer > 005) //@74 forever
 			messageText.text = "end of line";
+
 
 		timerText.text = timer.ToString();  // updates the timer
 	}
@@ -78,16 +79,17 @@ public class HudScript2 : MonoBehaviour {
 		CancelInvoke ();
 		string Score = timer.ToString ();
 		activeTimer = false;
+		timer = 99999f;
 		messageText.text = "Game Over - Score " + Score;
 	}
 
 	void Spawn1() {
-		platform.GetComponent<MapSpawner> ().spawnVirus1 ();
+		platform.GetComponent<MapSpawner2> ().spawnVirus1 ();
 	}
 	void Spawn2() {
-		platform.GetComponent<MapSpawner> ().spawnVirus2 ();
+		platform.GetComponent<MapSpawner2> ().spawnVirus2 ();
 	}
 	void Spawn3() {
-		platform.GetComponent<MapSpawner> ().spawnVirus3 ();
+		platform.GetComponent<MapSpawner2> ().spawnVirus3 ();
 	}
 }
