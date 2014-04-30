@@ -10162,16 +10162,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeTower: {fileID: 0}
   towers:
-  - {fileID: 100000, guid: 83795793ca398b043a689de2219bb69b, type: 2}
+  - {fileID: 100000, guid: 3a842cb5f671442208f8ab7e5d48b8a1, type: 2}
   - {fileID: 100010, guid: 572af1ea05cb5274f99a2665934fa6b7, type: 2}
-  - {fileID: 100018, guid: 93ccb0adbb804fa409f013fb50fe1e80, type: 2}
-  - {fileID: 100010, guid: 91a5e4fed8dc95d42b36688d2405e3db, type: 2}
-  - {fileID: 100010, guid: 1833f22b37736724fa1d47f29700dc6e, type: 2}
-  - {fileID: 100010, guid: 1d96ee10ed3d504498c7b39497a45b30, type: 2}
+  - {fileID: 100018, guid: e1ba4361fb0f24f51bc29315b74a6f18, type: 2}
+  - {fileID: 100010, guid: 1a83faa8d5c3c4dbe9114884fd07f670, type: 2}
+  - {fileID: 100010, guid: df7217df22dda4b6591f5f83275518b5, type: 2}
+  - {fileID: 100010, guid: dda665bee28f04e5f87b431abbdff1cc, type: 2}
   - {fileID: 100010, guid: d8e38afb382ba644c947335da07355e8, type: 2}
-  - {fileID: 100018, guid: 39da0e4db22e9004ba967af4df3498e7, type: 2}
-  - {fileID: 100018, guid: 35727638424825e4d9a9b91aba9e7cab, type: 2}
-  - {fileID: 100018, guid: e711aab8865bc62488b9833f1ace33eb, type: 2}
+  - {fileID: 100018, guid: eec30b31e0d8a4f868caf7f8cd0cd4ce, type: 2}
+  - {fileID: 100018, guid: 8c084eb6ed6ab4987bc06f63367cda0c, type: 2}
+  - {fileID: 100018, guid: 3e10e15ba7f6c4df9a96e6bfed85db41, type: 2}
   maxHealth: 100
   RAM: 500
   Hud: {fileID: 1075670056}
