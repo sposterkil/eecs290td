@@ -21,6 +21,9 @@ public class HudScript : MonoBehaviour {
 		InvokeRepeating ("Spawn3", 50.0f, 0.5f);
 		InvokeRepeating ("Spawn2", 74.0f, 5.0f);
 		InvokeRepeating ("Spawn1", 120.0f, 2.0f);
+		InvokeRepeating ("Spawn3", 160.0f, 0.5f);
+		InvokeRepeating ("Spawn2", 200.0f, 2.0f);
+		InvokeRepeating ("Spawn3", 250.0f, 0.5f);
 	}
 	 
 	// Update is called once per frame
