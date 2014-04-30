@@ -3295,7 +3295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a33f9c078a68814891e972d13c818bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 473245118}
 --- !u!1 &480316451
 GameObject:
   m_ObjectHideFlags: 0
@@ -9961,9 +9960,9 @@ MonoBehaviour:
   spawn1: {fileID: 159147169}
   spawn2: {fileID: 1732554253}
   spawn3: {fileID: 387794960}
-  virus1: {fileID: 100000, guid: 35d9d8f402a60554c8af459de1939915, type: 2}
-  virus2: {fileID: 100006, guid: 9fd73648eab44f4419a039c86f5377ca, type: 2}
-  virus3: {fileID: 100012, guid: 813b8982bf805074e835dbd21cc36a8a, type: 2}
+  virus1: {fileID: 100000, guid: 6320c4977b29a4dcd9ff2dfff772d896, type: 2}
+  virus2: {fileID: 100006, guid: c541ccd2d88eb4fd88bc2e615181f494, type: 2}
+  virus3: {fileID: 100012, guid: a8c60edc1e5e14f569eaf4e682caeeae, type: 2}
 --- !u!23 &1661968910
 Renderer:
   m_ObjectHideFlags: 0
@@ -10196,6 +10195,14 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b937666eeed1bff409a00932af7cdaf4, type: 2}
+    - target: {fileID: 8200000, guid: 166950d4bea06ee45ab0e8b6f8d0b6b1, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 63dd7137bc85e4550a67725a945d83e3, type: 3}
+    - target: {fileID: 8200002, guid: 166950d4bea06ee45ab0e8b6f8d0b6b1, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3345d5b741f43459c828d4fae75dbb5a, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 166950d4bea06ee45ab0e8b6f8d0b6b1, type: 2}
   m_RootGameObject: {fileID: 1710626466}
@@ -10308,7 +10315,7 @@ AudioSource:
   m_GameObject: {fileID: 1710626466}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: e36bfa45f304fbe48b956c2d058eaba8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 63dd7137bc85e4550a67725a945d83e3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: .224999994
   m_Pitch: .939999998
@@ -11473,7 +11480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a33f9c078a68814891e972d13c818bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1901438894}
 --- !u!1001 &1902205700
 Prefab:
   m_ObjectHideFlags: 0
@@ -12240,7 +12246,7 @@ AudioSource:
   m_GameObject: {fileID: 1999245138}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 8ae5ead71afb7f14eaa29241096e07f2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3345d5b741f43459c828d4fae75dbb5a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: .207000002
   m_Pitch: .810000002
@@ -12947,7 +12953,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a33f9c078a68814891e972d13c818bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 2076403539}
 --- !u!1 &2093307156
 GameObject:
   m_ObjectHideFlags: 0
