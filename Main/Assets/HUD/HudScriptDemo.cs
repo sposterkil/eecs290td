@@ -118,13 +118,13 @@ public class HudScriptDemo : MonoBehaviour {
 		if (28 > timer && timer > 27)
 			introText.text = "selectable using";
 		if (27 > timer && timer > 26.5)
-			introText.text = "number keys 1 - 9";
+			introText.text = "number keys 1 - 0";
 		if (26.5 > timer && timer > 26)
-			introText.text = "number keys 1 - 9_";
+			introText.text = "number keys 1 - 0_";
 		if (26 > timer && timer > 25.5)
-			introText.text = "number keys 1 - 9";
+			introText.text = "number keys 1 - 0";
 		if (25.5 > timer && timer > 25)
-			introText.text = "number keys 1 - 9_";
+			introText.text = "number keys 1 - 0_";
 		if (25 > timer && timer > 24)
 			introText.text = "600MB of Memory";
 		if (24 > timer && timer > 23)
