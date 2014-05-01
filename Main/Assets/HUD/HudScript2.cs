@@ -30,25 +30,25 @@ public class HudScript2 : MonoBehaviour {
 		}
 
 		if (294 > timer && timer > 292) //@6-8
-			messageText.text = "Port 8023 Opening...4";
+			messageText.text = "Port 5603 Opening...4";
 		if (292 > timer && timer > 290) //@8-10
-			messageText.text = "Port 8023 Opening...3";
+			messageText.text = "Port 5603 Opening...3";
 		if (290 > timer && timer > 288) //@10-12
-			messageText.text = "Port 8023 Opening...2";
+			messageText.text = "Port 5603 Opening...2";
 		if (288 > timer && timer > 286) //@12-14
-			messageText.text = "Port 8023 Opening...1";	
+			messageText.text = "Port 5603 Opening...1";	
 		if (285 > timer && timer > 255) //@15-45 open port for 30
 			messageText.text = "Traffic: Port 8023";
 		if (255 > timer && timer > 254) //@45-46 
-			messageText.text = "Incoming DDOS";
+			messageText.text = "Load Balance Failure";
 		if (254 > timer && timer > 253) //@46-47
-			messageText.text = "Incoming DDOS...3";
+			messageText.text = "Load Balance Failure - Rerouting...3";
 		if (253 > timer && timer > 252) //@47-48
-			messageText.text = "Incoming DDOS...2";
+			messageText.text = "Load Balance Failure - Rerouting...2";
 		if (252 > timer && timer > 251) //@48-49
-			messageText.text = "Incoming DDOS...1";
+			messageText.text = "Load Balance Failure - Rerouting...1";
 		if (251 > timer && timer > 230) //@49-70 fast movers for 21
-			messageText.text = "High Traffic";
+			messageText.text = "Increased Load";
 		if (230 > timer && timer > 231) //@70-71
 			messageText.text = "Resource Hogs";
 		if (231 > timer && timer > 232) //@71-72
