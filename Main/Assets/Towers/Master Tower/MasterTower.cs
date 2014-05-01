@@ -25,6 +25,9 @@ public class MasterTower : MonoBehaviour {
 		// if we are at level 2
 		if (maxHealth != 0 && Level == 2) 
 			Hud.GetComponent<HudScript2>().updateHealth(health*100/maxHealth);
+		// if we are at the demo, which is level 3
+		if (maxHealth != 0 && Level == 3)
+			Hud.GetComponent<HudScriptDemo>().updateHealth(health*100/maxHealth);
 	}
 
 	// Update is called once per frame
@@ -38,6 +41,10 @@ public class MasterTower : MonoBehaviour {
 		// Update Health and RAM counters for level 1
 		if (Level == 2) {
 			Hud.GetComponent<HudScript2> ().updateRAM (RAM);
+		}
+
+		if (Level == 3) {
+			Hud.GetComponent<HudScriptDemo> ().updateRAM (RAM);
 		}
 
         GameObject targetLoc = PlatformUnderCursor();
@@ -131,6 +138,10 @@ public class MasterTower : MonoBehaviour {
 		if (Level == 2) {
 			if (maxHealth != 0)
 				Hud.GetComponent<HudScript2> ().updateHealth (health * 100 / maxHealth);
+		}
+		if (Level == 3) {
+			if (maxHealth != 0)
+				Hud.GetComponent<HudScriptDemo> ().updateHealth (health * 100 / maxHealth);
 		}
 	}
 
