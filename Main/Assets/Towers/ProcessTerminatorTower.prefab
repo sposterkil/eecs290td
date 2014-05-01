@@ -474,7 +474,7 @@ MonoBehaviour:
   targeting: 3
   color: {r: .544117689, g: 0, b: 0, a: 0}
   behaviourSet: 1
-  damage: 15
+  damage: 20
   cooldown: 100
   cooldownRamp: 0
   minCooldown: 0
