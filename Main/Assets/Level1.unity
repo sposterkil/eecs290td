@@ -3295,7 +3295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a33f9c078a68814891e972d13c818bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 473245118}
 --- !u!1 &480316451
 GameObject:
   m_ObjectHideFlags: 0
@@ -9961,9 +9960,9 @@ MonoBehaviour:
   spawn1: {fileID: 159147169}
   spawn2: {fileID: 1732554253}
   spawn3: {fileID: 387794960}
-  virus1: {fileID: 100000, guid: 35d9d8f402a60554c8af459de1939915, type: 2}
-  virus2: {fileID: 100006, guid: 9fd73648eab44f4419a039c86f5377ca, type: 2}
-  virus3: {fileID: 100012, guid: 813b8982bf805074e835dbd21cc36a8a, type: 2}
+  virus1: {fileID: 100000, guid: 6320c4977b29a4dcd9ff2dfff772d896, type: 2}
+  virus2: {fileID: 100006, guid: c541ccd2d88eb4fd88bc2e615181f494, type: 2}
+  virus3: {fileID: 100012, guid: a8c60edc1e5e14f569eaf4e682caeeae, type: 2}
 --- !u!23 &1661968910
 Renderer:
   m_ObjectHideFlags: 0
@@ -11473,7 +11472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a33f9c078a68814891e972d13c818bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1901438894}
 --- !u!1001 &1902205700
 Prefab:
   m_ObjectHideFlags: 0
@@ -12947,7 +12945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a33f9c078a68814891e972d13c818bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 2076403539}
 --- !u!1 &2093307156
 GameObject:
   m_ObjectHideFlags: 0
