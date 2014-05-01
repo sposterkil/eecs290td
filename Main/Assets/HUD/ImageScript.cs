@@ -33,7 +33,7 @@ public class ImageScript : MonoBehaviour {
 			text.color = Color.red;
 			break;
 		case "BreakTower (UnityEngine.GameObject)":
-			text.text = "Break - Single shot, High Range, High Damage";
+			text.text = "Break - Single Shot, High Range, High Damage";
 			text.color = Color.grey;
 			break;
 		case "WipeTower (UnityEngine.GameObject)":
