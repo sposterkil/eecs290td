@@ -9,6 +9,8 @@ public class NodeScripts : MonoBehaviour {
 	public Transform nextNode1;
 	public Transform nextNode2;
 	public Transform nextNode3;
+	
+	bool nullError = false;
 
 	// Update is called once per frame
 	void Update () {
@@ -20,6 +22,7 @@ public class NodeScripts : MonoBehaviour {
 		Debug.Log ("Triggered!");	
 		int nodeChoice = Random.Range (1, 4); // pick a random next node
 		switch (nodeChoice) {
+			/*
 			case 1:
 			other.gameObject.GetComponent<EnemyScript>().setTarget (nextNode1.position);
 			Debug.Log ("Move => 1");	
@@ -35,6 +38,64 @@ public class NodeScripts : MonoBehaviour {
 			default :
 				Debug.LogError("fell off random switch to move to next node");
 				break;
+			*/
+			
+			case 1:
+			if (other.gameObject.GetComponent<EnemyScript>() != null)
+				other.gameObject.GetComponent<EnemyScript>().setTarget (nextNode1.position);
+			else
+				nullError = true;
+			Debug.Log ("Move => 1");	
+			break;
+			case 2:
+			if (other.gameObject.GetComponent<EnemyScript>() != null)
+				other.gameObject.GetComponent<EnemyScript>().setTarget (nextNode2.position);
+			else
+				nullError = true;
+			Debug.Log ("Move => 2");	
+			break;
+			case 3:
+			if (other.gameObject.GetComponent<EnemyScript>() != null)
+				other.gameObject.GetComponent<EnemyScript>().setTarget (nextNode3.position);
+			else
+				nullError = true;
+			Debug.Log ("Move => 3");
+				break;
+			default :
+				Debug.LogError("fell off random switch to move to next node");
+				break;
+		}
+	}
+	
+	void OnTriggerStay(Collider other) {
+		if (nullError) {
+			int nodeChoice = Random.Range (1, 4); // pick a random next node
+			switch (nodeChoice) {
+				case 1:
+				if (other.gameObject.GetComponent<EnemyScript>() != null) {
+					other.gameObject.GetComponent<EnemyScript>().setTarget (nextNode1.position);
+					nullError = false;
+				}
+				Debug.Log ("Move => 1");	
+				break;
+				case 2:
+				if (other.gameObject.GetComponent<EnemyScript>() != null) {
+					other.gameObject.GetComponent<EnemyScript>().setTarget (nextNode2.position);
+					nullError = false;
+				}
+				Debug.Log ("Move => 2");	
+				break;
+				case 3:
+				if (other.gameObject.GetComponent<EnemyScript>() != null) {
+					other.gameObject.GetComponent<EnemyScript>().setTarget (nextNode3.position);
+					nullError = false;
+				}
+				Debug.Log ("Move => 3");
+				break;
+				default :
+					Debug.LogError("fell off random switch to move to next node");
+					break;
+			}
 		}
 	}
 }
