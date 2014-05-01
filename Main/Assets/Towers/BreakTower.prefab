@@ -475,7 +475,7 @@ MonoBehaviour:
   color: {r: .257352948, g: .257352948, b: .257352948, a: 0}
   behaviourSet: 1
   damage: 200
-  cooldown: 3000
+  cooldown: 1500
   cooldownRamp: 0
   minCooldown: 0
   rangeMin: 20

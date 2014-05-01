@@ -498,8 +498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e1af358049e5c438929f0f5adcd5ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 10
-  health: 4000
+  value: 25
+  health: 2500
   defaultDamage: 0
   defaultSpeed: 5
   emitter: {fileID: 100000, guid: f32807737704ed0478a94aeac1d7b9cd, type: 2}
